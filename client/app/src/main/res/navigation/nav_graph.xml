@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.client.FirstFragment"
+        android:name="com.example.client.LoginActivity"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        tools:layout="@layout/login_page" >
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"

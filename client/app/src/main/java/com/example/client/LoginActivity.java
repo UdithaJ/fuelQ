@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import com.example.client.databinding.FragmentFirstBinding;
+import com.example.client.databinding.LoginPageBinding;
 
-public class FirstFragment extends Fragment {
+public class LoginActivity extends Fragment {
 
-private FragmentFirstBinding binding;
+private LoginPageBinding binding;
 
     @Override
     public View onCreateView(
@@ -20,7 +20,7 @@ private FragmentFirstBinding binding;
             Bundle savedInstanceState
     ) {
 
-      binding = FragmentFirstBinding.inflate(inflater, container, false);
+      binding = LoginPageBinding.inflate(inflater, container, false);
       return binding.getRoot();
 
     }
@@ -31,7 +31,7 @@ private FragmentFirstBinding binding;
         binding.activityMainLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(LoginActivity.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
@@ -39,7 +39,7 @@ private FragmentFirstBinding binding;
         binding.registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(LoginActivity.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
