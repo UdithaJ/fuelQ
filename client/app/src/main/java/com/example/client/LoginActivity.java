@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import com.example.client.databinding.FragmentSecondBinding;
+import com.example.client.databinding.LoginPageBinding;
 
-public class SecondFragment extends Fragment {
+public class LoginActivity extends Fragment {
 
-private FragmentSecondBinding binding;
+private LoginPageBinding binding;
 
     @Override
     public View onCreateView(
@@ -20,7 +20,7 @@ private FragmentSecondBinding binding;
             Bundle savedInstanceState
     ) {
 
-      binding = FragmentSecondBinding.inflate(inflater, container, false);
+      binding = LoginPageBinding.inflate(inflater, container, false);
       return binding.getRoot();
 
     }
@@ -28,11 +28,19 @@ private FragmentSecondBinding binding;
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        binding.activityMainLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
+
+        binding.registerLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
     }
