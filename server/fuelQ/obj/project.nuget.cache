@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "vtm9b/1Y54bNZesecyrm1sgPuaK+oHRoNkOu3+0FG4HEcvlQbf6A0gQyLpR/GLqJL8N1wJpXmN+tgwbYXTGvyw==",
+  "success": true,
+  "projectFilePath": "D:\\fuelQ\\fuelQ\\server\\fuelQ\\fuelQ.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Win\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Win\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Win\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Win\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Win\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Win\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
