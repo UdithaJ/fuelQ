@@ -12,6 +12,7 @@ builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configu
 builder.Services.AddScoped<IFuelTypeService, FuelTypeService>();
 builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 builder.Services.AddScoped<IFuelStatioService, FuelStatioService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

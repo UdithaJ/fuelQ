@@ -46,8 +46,8 @@ namespace fuelQ.Controllers
         [HttpPut("{id}")]
         public ActionResult Edit(string id, VehicleType vehicleType)
         {
-            var existingFuelStation = GetVehicleTypeById(id);
-            if (existingFuelStation == null)
+            var existingVehicleType = GetVehicleTypeById(id);
+            if (existingVehicleType == null)
             {
                 return NotFound($"Vehicle Type with id {id} not found.");
             }
@@ -59,8 +59,8 @@ namespace fuelQ.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(string id)
         {
-            var fuelStation = GetVehicleTypeById(id);
-            if (fuelStation == null)
+            var vehicleType = GetVehicleTypeById(id);
+            if (vehicleType == null)
             {
                 return NotFound($"Vehicle Type with id {id} not found.");
             }
