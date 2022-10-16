@@ -14,6 +14,7 @@ builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 builder.Services.AddScoped<IFuelStatioService, FuelStatioService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IFuelInventoryService, FuelInventoryService>();
+builder.Services.AddScoped<IVehicleQueueService, VehicleQueueService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
