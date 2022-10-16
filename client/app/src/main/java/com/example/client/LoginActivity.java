@@ -36,11 +36,19 @@ private LoginPageBinding binding;
             }
         });
 
-        binding.registerLink.setOnClickListener(new View.OnClickListener() {
+        binding.driverRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginActivity.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
+
+        binding.fsoRegisterLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.login_to_fso_sign_up);
             }
         });
     }
