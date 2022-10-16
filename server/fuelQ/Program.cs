@@ -10,6 +10,7 @@ builder.Services.Configure<FuelQDatabaseSetupHelper>(builder.Configuration.GetSe
 builder.Services.AddSingleton<IfuelQDatabaseSetupHelper>(sp => sp.GetRequiredService<IOptions<FuelQDatabaseSetupHelper>>().Value);
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("FuelQDatabaseSettings:ConnectionString")));
 builder.Services.AddScoped<IFuelTypeService, FuelTypeService>();
+builder.Services.AddScoped<IVehicleTypeService, VehicleTypeService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
