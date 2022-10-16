@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/login_to_fso_sign_up"
+            app:destination="@id/FSO_Sign_Up_Fragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +29,12 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/FSO_Sign_Up_Fragment"
+        android:name="com.example.client.FSOSignUpActivity"
+        android:label="Sign Up As Fuel Station Owner"
+        tools:layout="@layout/fso_sign_up_page" >
+    </fragment>
+
 </navigation>
