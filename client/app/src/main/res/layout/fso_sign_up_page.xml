@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".FSOSignUpActivity">
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -15,6 +20,15 @@
         tools:context=".MainActivity"
         android:gravity="center_vertical"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textSize="35sp"
+            android:textColor="#FF8601"
+            android:textStyle="bold"
+            android:textAlignment="center" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
@@ -33,6 +47,12 @@
                     android:layout_height="wrap_content"
                     android:text="Sign Up"
                     android:textSize="30sp"
+                    android:textAlignment="textStart" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="As a Fuel Station"
+                    android:textSize="18sp"
                     android:textAlignment="textStart" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -123,6 +143,8 @@
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
+
+</ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
