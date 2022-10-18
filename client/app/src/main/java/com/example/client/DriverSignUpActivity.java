@@ -1,5 +1,7 @@
 package com.example.client;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,8 +76,6 @@ Button signUp;
         binding.driverSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(DriverSignUpActivity.this)
-                        .navigate(R.id.driver_sign_up_to_FirstFragment);
 
                 String nicNumber =  nic.getEditText().getText().toString();
                 String vNumber =  vehicleNumber.getEditText().getText().toString();
@@ -84,17 +84,31 @@ Button signUp;
                 String pass =  password.getEditText().getText().toString();
 
 
-                registerDriver(nicNumber, vNumber, vType, fType, pass);
-                //getFuelTypes();
+                Integer responseCode   = registerDriver(nicNumber, vNumber, vType, fType, pass);
+
+                if (responseCode == 200){
+                    NavHostFragment.findNavController(DriverSignUpActivity.this)
+                            .navigate(R.id.driver_sign_up_to_FirstFragment);
+
+                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("userId", "user123");
+                    editor.apply();
+
+                    SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    String userId = reader.getString("userId", "undefined");
+
+                    Log.i("Reading from storage", userId);
+                }
 
             }
 
         });
     }
 
-    private void registerDriver(String nic, String vNumber,String vType, String fType, String password){
+    private Integer registerDriver(String nic, String vNumber,String vType, String fType, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        Driver driver = new Driver(nic, password, vNumber, fType, vType);
+        Driver driver = new Driver("", nic, password, vNumber, fType, vType);
         HttpsTrustManager.allowAllSSL();
 
         JSONObject newDriver = new JSONObject();  //if needed
@@ -130,6 +144,7 @@ Button signUp;
             }
         });
 
+        return 200;
     }
 
     private void getFuelTypes(){

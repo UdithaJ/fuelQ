@@ -17,8 +17,15 @@ public interface Api {
             "Accept: application/json",
             "Connection: keep-alive"
     })
-    @POST("User/AddUser")
+    @POST("User/AddDriver")
     Call<Driver> registerDriver(@Body Driver driver);
+
+    @Headers({
+            "Accept: application/json",
+            "Connection: keep-alive"
+    })
+    @POST("User/AddFuelStation")
+    Call<FuelStation> registerFuelStation(@Body FuelStation fuelStation);
 
     @Headers({
             "Accept: application/json",
@@ -26,4 +33,12 @@ public interface Api {
     })
     @GET("GetFuelTypes")
     Call<List<FuelType>> getFuelTypes();
+
+    @Headers({
+            "Accept: application/json",
+            "Connection: keep-alive"
+    })
+    @POST("login")
+    Call<User> login(@Body User user);
 }
+
