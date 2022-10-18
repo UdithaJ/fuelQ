@@ -22,8 +22,11 @@ namespace fuelQ.Models
         [BsonElement("password")]
         public string Password { get; set; } = String.Empty;
 
-        [BsonElement("vehicleType")]
+        [BsonElement("userType")]
+        public string UserType { get; set; } = String.Empty;
+
+        /*[BsonElement("vehicleType")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string VehicleType { get; set; } = String.Empty;
+        public string VehicleType { get; set; } = String.Empty;*/
     }
 }

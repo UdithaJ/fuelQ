@@ -10,5 +10,6 @@
         public string FuelInventoryCollectionName { get; set; } = String.Empty;
         public string VehicleQueueCollectionName { get; set; } = String.Empty;
         public string VehicleTypeCollectionName { get; set; } = String.Empty;
+        public string VehicleCollectionName { get; set; } = String.Empty;
     }
 }
