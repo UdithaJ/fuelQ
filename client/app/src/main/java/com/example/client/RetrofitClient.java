@@ -15,12 +15,7 @@ public class RetrofitClient {
 
     private RetrofitClient() {
 
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        SSLContext sslContext = SslUtils.getSslContextForCertificateFile("BPClass2RootCA-sha2.cer");
-        HttpsTrustManager httpsTrustManager = new HttpsTrustManager();
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
                 .retryOnConnectionFailure(true)
                 .build();
 

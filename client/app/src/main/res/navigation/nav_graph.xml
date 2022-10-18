@@ -35,6 +35,17 @@
         android:name="com.example.client.FSOSignUpActivity"
         android:label="Sign Up As Fuel Station Owner"
         tools:layout="@layout/fso_sign_up_page" >
+
+        <action
+            android:id="@+id/fso_sign_up_to_fs"
+            app:destination="@id/FS_Activity_Page" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FS_Activity_Page"
+        android:name="com.example.client.FuelStationActivity"
+        android:label="Update Data"
+        tools:layout="@layout/fuel_station_page" >
     </fragment>
 
 </navigation>

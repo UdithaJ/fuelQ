@@ -13,6 +13,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
 import com.example.client.databinding.DriverSignUpPageBinding;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
