@@ -2,11 +2,17 @@ package com.example.client;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.client.databinding.DriverSignUpPageBinding;
+import com.example.client.databinding.FsoSignUpPageBinding;
+import com.example.client.databinding.FuelStationPageBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,12 +21,9 @@ import android.view.ViewGroup;
  */
 public class FSOSignUpActivity extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private @NonNull FsoSignUpPageBinding binding;
+
 
     public FSOSignUpActivity() {
         // Required empty public constructor
@@ -30,8 +33,7 @@ public class FSOSignUpActivity extends Fragment {
     public static FSOSignUpActivity newInstance(String param1, String param2) {
         FSOSignUpActivity fragment = new FSOSignUpActivity();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,16 +41,28 @@ public class FSOSignUpActivity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fso_sign_up_page, container, false);
+        binding = FsoSignUpPageBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
     }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.fsoSignUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(FSOSignUpActivity.this)
+                        .navigate(R.id.fso_sign_up_to_fs);
+
+            }
+
+        });
+    }
+
 }
