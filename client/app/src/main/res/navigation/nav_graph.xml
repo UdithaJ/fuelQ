@@ -18,11 +18,15 @@
         <action
             android:id="@+id/login_to_fso_sign_up"
             app:destination="@id/FSO_Sign_Up_Fragment" />
+
+        <action
+            android:id="@+id/login_to_fs_page"
+            app:destination="@id/FS_Activity_Page" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.client.DriverSignUpActivity"
-        android:label="@string/second_fragment_label"
+        android:label="Driver Sign Up"
         tools:layout="@layout/driver_sign_up_page" >
 
         <action
@@ -37,8 +41,8 @@
         tools:layout="@layout/fso_sign_up_page" >
 
         <action
-            android:id="@+id/fso_sign_up_to_fs"
-            app:destination="@id/FS_Activity_Page" />
+            android:id="@+id/fso_sign_up_to_login"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
     <fragment
