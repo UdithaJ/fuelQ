@@ -62,21 +62,27 @@ private LoginPageBinding binding;
 
                 Integer responseCode  = login(nicNumber, pass);
 
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("userId", "user123");
+                editor.apply();
+
+                SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+                String userId = reader.getString("userId", "undefined");
+
                 if (responseCode == 200){
                     NavHostFragment.findNavController(LoginActivity.this)
                             .navigate(R.id.login_to_fs_page);
-
-                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("userId", "user123");
-                    editor.apply();
-
-                    SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    String userId = reader.getString("userId", "undefined");
-
-                    Log.i("Reading from storage", userId);
-
                 }
+                else if (responseCode == 300){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_admin);
+                }
+                else if (responseCode == 600){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_fs_page);
+                }
+
             }
         });
 
@@ -134,7 +140,7 @@ private LoginPageBinding binding;
             }
         });
 
-        return 200;
+        return 300;
     }
 
 @Override
