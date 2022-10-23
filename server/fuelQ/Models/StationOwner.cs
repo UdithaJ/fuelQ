@@ -15,5 +15,6 @@ namespace fuelQ.Models
         public string StationName { get; set; } = String.Empty;
 
         public string StationAddress { get; set; } = String.Empty;
+        public string permitNumber { get; set; } = String.Empty;
     }
 }

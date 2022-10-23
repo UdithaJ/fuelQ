@@ -17,5 +17,8 @@ namespace fuelQ.Models
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("stationOwnerId")]
         public string StationOwnerId { get; set; } = String.Empty;
+        
+        [BsonElement("permitNumber")]
+        public string permitNumber { get; set; } = String.Empty;
     }
 }
