@@ -140,7 +140,7 @@ private LoginPageBinding binding;
             }
         });
 
-        return 300;
+        return 600;
     }
 
 @Override

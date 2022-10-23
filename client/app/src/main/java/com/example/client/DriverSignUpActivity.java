@@ -39,7 +39,7 @@ AutoCompleteTextView fuelType;
 AutoCompleteTextView vehicleType;
 ArrayAdapter<String> fuelTypeAdapterItems;
 ArrayAdapter<String> vehicleTypeAdapterItems;
-TextInputLayout nic, password, vehicleNumber;
+TextInputLayout nic, username, password, vehicleNumber;
 Button signUp;
 
     @Override
@@ -55,6 +55,7 @@ Button signUp;
         fuelType = view.findViewById(R.id.fuel_type);
         vehicleType = view.findViewById(R.id.vehicle_type);
         nic = view.findViewById(R.id.nic_field);
+        username = view.findViewById(R.id.name_field);
         vehicleNumber = view.findViewById(R.id.vehicle_number_field);
         password = view.findViewById(R.id.password_field);
         signUp = view.findViewById(R.id.driver_sign_up_button);
@@ -78,13 +79,14 @@ Button signUp;
             public void onClick(View view) {
 
                 String nicNumber =  nic.getEditText().getText().toString();
+                String name =  username.getEditText().getText().toString();
                 String vNumber =  vehicleNumber.getEditText().getText().toString();
                 String fType =  fuelType.getText().toString();
                 String vType =  vehicleType.getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
 
-                Integer responseCode   = registerDriver(nicNumber, vNumber, vType, fType, pass);
+                Integer responseCode   = registerDriver(nicNumber, name, vNumber, vType, fType, pass);
 
                 if (responseCode == 200){
                     NavHostFragment.findNavController(DriverSignUpActivity.this)
@@ -106,9 +108,9 @@ Button signUp;
         });
     }
 
-    private Integer registerDriver(String nic, String vNumber,String vType, String fType, String password){
+    private Integer registerDriver(String nic, String name, String vNumber,String vType, String fType, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        Driver driver = new Driver("", nic, password, vNumber, fType, vType);
+        Driver driver = new Driver("", nic, name, password, vNumber, fType, vType);
         HttpsTrustManager.allowAllSSL();
 
         JSONObject newDriver = new JSONObject();  //if needed
