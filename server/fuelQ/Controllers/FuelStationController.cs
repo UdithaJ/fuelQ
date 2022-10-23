@@ -1,4 +1,5 @@
-﻿using fuelQ.Models;
+﻿using fuelQ.Factory;
+using fuelQ.Models;
 using fuelQ.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,14 @@ namespace fuelQ.Controllers
     public class FuelStationController : Controller
     {
         private readonly IFuelStatioService fuelStationService;
+        private readonly IUserService userService;
+        private readonly StationFactory stationFactory;
 
-        public FuelStationController(IFuelStatioService fuelStationService)
+        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService)
         {
             this.fuelStationService = fuelStationService;
+            this.userService = userService;
+            this.stationFactory = new StationFactory(userService, fuelStationService);
         }
         // GET: FuelStationController
         [HttpGet("GetFuelStations")]
@@ -66,6 +71,13 @@ namespace fuelQ.Controllers
             }
             fuelStationService.Remove(id);
             return Ok($"Fuel Station with id {id} is deleted.");
+        }
+
+        // Post: UserController/RegisterDriver
+        [HttpPost("registerFuelStation")]
+        public ActionResult<String> RegisterDriver([FromBody] StationOwner stationOwner)
+        {
+            return stationFactory.RegisterStation(stationOwner);
         }
     }
 }

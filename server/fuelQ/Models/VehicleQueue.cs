@@ -32,5 +32,8 @@ namespace fuelQ.Models
 
         [BsonElement("isIn")]
         public bool IsIn { get; set; }
+
+        [BsonElement("expectedAmmount")]
+        public int ExpectedAmmount { get; set; }
     }
 }

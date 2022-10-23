@@ -10,5 +10,6 @@
         string FuelInventoryCollectionName { get; set; }
         string VehicleQueueCollectionName { get; set; }
         string VehicleTypeCollectionName { get; set; }
+        string VehicleCollectionName { get; set; }
     }
 }
