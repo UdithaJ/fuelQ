@@ -31,10 +31,12 @@ import retrofit2.Response;
 
 public class DriverSignUpActivity extends Fragment  {
 
+    private Config config;
+
 private DriverSignUpPageBinding binding;
 
 String[] fuelTypes = {"Petrol", "Diesel"};
-String[] vehicleTypes = {"Bike", "Car/Van", "ThreeWheels", "Bus"};
+String[] vehicleTypes = {"Bike", "Car", "ThreeWheels", "Bus"};
 AutoCompleteTextView fuelType;
 AutoCompleteTextView vehicleType;
 ArrayAdapter<String> fuelTypeAdapterItems;
@@ -85,8 +87,30 @@ Button signUp;
                 String vType =  vehicleType.getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
+                String fuelId = "";
+                String vTypeId = "";
 
-                Integer responseCode   = registerDriver(nicNumber, name, vNumber, vType, fType, pass);
+                if (fType.equals("Petrol")){
+                    fuelId = Config.petrolId;
+                }
+                else if (fType.equals("Diesel")){
+                    fuelId = Config.dieselId;
+                }
+
+                if (vType.equals("Bike")){
+                    vTypeId = Config.bike;
+                }
+                else if (vType.equals("Car")){
+                    vTypeId = Config.car;
+                }
+                else if (vType.equals("ThreeWheels")){
+                    vTypeId = Config.threeWheel;
+                }
+                else if (vType.equals("Bus")){
+                    vTypeId = Config.bus;
+                }
+
+                Integer responseCode   = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
 
                 if (responseCode == 200){
                     NavHostFragment.findNavController(DriverSignUpActivity.this)
@@ -100,7 +124,7 @@ Button signUp;
                     SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                     String userId = reader.getString("userId", "undefined");
 
-                    Log.i("Reading from storage", userId);
+
                 }
 
             }
@@ -113,17 +137,19 @@ Button signUp;
         Driver driver = new Driver("", nic, name, password, vNumber, fType, vType);
         HttpsTrustManager.allowAllSSL();
 
-        JSONObject newDriver = new JSONObject();  //if needed
-        try {
-            newDriver.put("nic", nic);
-            newDriver.put("vehicleNumber", vNumber);
-            newDriver.put("fuelType", fType);
-            newDriver.put("vehicleType", vType);
-            newDriver.put("password", password);
+        Log.i("Reading from storage", driver.getFuelType());
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject newDriver = new JSONObject();  //if needed
+//        try {
+//            newDriver.put("nic", nic);
+//            newDriver.put("vehicleNumber", vNumber);
+//            newDriver.put("fuelType", fType);
+//            newDriver.put("vehicleType", vType);
+//            newDriver.put("password", password);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         Call<Driver> call = retrofitClient.getMyApi().registerDriver(driver);
         Log.i("payload", driver.getNic());

@@ -3,18 +3,18 @@ package com.example.client;
 public class Driver {
     private String id;
     private String nic;
-    private String name;
+    private String Name;
     private String password;
-    private String vehicleNumber;
+    private String vehicleNo;
     private String fuelType;
     private String vehicleType;
 
     public Driver(String id, String name, String nic, String password, String vehicleNumber, String fuelType, String vehicleType) {
         this.id = id;
         this.nic = nic;
-        this.name = name;
+        this.Name = name;
         this.password = password;
-        this.vehicleNumber = vehicleNumber;
+        this.vehicleNo = vehicleNumber;
         this.fuelType = fuelType;
         this.vehicleType = vehicleType;
     }
@@ -44,11 +44,11 @@ public class Driver {
     }
 
     public String getVehicleNumber() {
-        return vehicleNumber;
+        return vehicleNo;
     }
 
     public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
+        this.vehicleNo = vehicleNumber;
     }
 
     public String getFuelType() {
@@ -68,10 +68,10 @@ public class Driver {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 }
