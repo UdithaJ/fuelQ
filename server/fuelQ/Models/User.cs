@@ -16,8 +16,8 @@ namespace fuelQ.Models
         [BsonElement("nic")]
         public string NIC { get; set; } = String.Empty;
 
-        [BsonElement("email")]
-        public string Email { get; set; } = String.Empty;
+        /*[BsonElement("email")]
+        public string Email { get; set; } = String.Empty;*/
 
         [BsonElement("password")]
         public string Password { get; set; } = String.Empty;

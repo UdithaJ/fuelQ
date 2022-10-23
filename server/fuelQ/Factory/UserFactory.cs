@@ -24,7 +24,7 @@ namespace fuelQ.Factory
             user.NIC = driver.NIC;
             user.Name = driver.Name;
             user.Password = driver.Password;
-            user.Email = driver.Email;
+            //user.Email = driver.Email;
             user.UserType = "Driver";
             userService.Create(user);
             vehicle.OwnerId = user.Id; 

@@ -21,7 +21,7 @@ namespace fuelQ.Factory
             user.NIC = stationOwner.NIC;
             user.Name = stationOwner.UserName;
             user.Password = stationOwner.Password;
-            user.Email = stationOwner.Email;
+            //user.Email = stationOwner.Email;
             user.UserType = "Station Owner";
             userService.Create(user);
             station.StationOwnerId = user.Id;
