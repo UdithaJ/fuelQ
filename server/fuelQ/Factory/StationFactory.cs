@@ -27,6 +27,7 @@ namespace fuelQ.Factory
             station.StationOwnerId = user.Id;
             station.Address = stationOwner.StationAddress;
             station.Name = stationOwner.StationName;
+            station.permitNumber = stationOwner.permitNumber;
             fuelStatioService.Create(station);
             return JsonConvert.SerializeObject(new { user = user , station = station});
         }
