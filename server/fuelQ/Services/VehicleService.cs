@@ -29,6 +29,11 @@ namespace fuelQ.Services
             return _vehicle.Find(vehicle => vehicle.Id == id).FirstOrDefault();
         }
 
+        public Vehicle GetVehicleByOwnerId(string id)
+        {
+            return _vehicle.Find(vehicle => vehicle.OwnerId == id).FirstOrDefault();
+        }
+
         public void Remove(string id)
         {
             _vehicle.DeleteOne(vehicle => vehicle.Id == id);

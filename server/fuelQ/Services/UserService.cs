@@ -28,6 +28,14 @@ namespace fuelQ.Services
         {
             return _user.Find(user => user.Id == id).FirstOrDefault();
         }
+        public User GetByNic(string nic)
+        {
+            return _user.Find(user => user.NIC == nic).FirstOrDefault();
+        }
+        public User GetValidUserByNic(string nic , string password)
+        {
+            return _user.Find(user => user.NIC == nic && user.Password == password).FirstOrDefault();
+        }
 
         public void Remove(string id)
         {
