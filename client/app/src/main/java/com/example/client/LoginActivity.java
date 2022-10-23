@@ -13,12 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.client.databinding.FsoSignUpPageBinding;
 import com.example.client.databinding.LoginPageBinding;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,28 +57,10 @@ private LoginPageBinding binding;
                 String nicNumber =  nic.getEditText().getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
-                Integer responseCode  = login(nicNumber, pass);
-
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("userId", "user123");
-                editor.apply();
+                login(nicNumber, pass);
 
                 SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
-                String userId = reader.getString("userId", "undefined");
-
-                if (responseCode == 200){
-                    NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_fs_page);
-                }
-                else if (responseCode == 300){
-                    NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_admin);
-                }
-                else if (responseCode == 600){
-                    NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_fs_page);
-                }
+                String userType = reader.getString("userType", "undefined");
 
             }
         });
@@ -105,42 +84,50 @@ private LoginPageBinding binding;
         });
     }
 
-    private Integer login(String nic, String password){
+    private void login(String nic, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        User user = new User(nic, password);
+        User user = new User("", nic, password, "", "");
         HttpsTrustManager.allowAllSSL();
+        Call<JsonObject> call = retrofitClient.getMyApi().login(user);
 
-        JSONObject newLogging = new JSONObject();  //if needed
-        try {
-            newLogging.put("nic", nic);
-            newLogging.put("password", password);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<User> call = retrofitClient.getMyApi().login(user);
-        Log.i("payload", user.getNic());
-
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                User responseFromAPI = response.body();
-                String responseString = "Response Code : " + response.code();
-                Log.i("response", responseString);
+                JsonObject object = response.body();
+                JsonObject userObj = (JsonObject) object.get("user");
 
+                String userId = String.valueOf(userObj.get("Id"));
+                String userType = userObj.get("UserType").getAsString();
+
+                if ("Admin".equals(userType)){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_admin);
+                }
+                else if ("Driver".equals(userType)){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_admin);
+                }
+                else if ("Station Owner".equals(userType)){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_fs_page);
+                }
+
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("userId", userId);
+                editor.putString("userType", userType);
+                editor.apply();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
                 Log.i("response", String.valueOf(t));
 
             }
         });
 
-        return 300;
     }
 
 @Override

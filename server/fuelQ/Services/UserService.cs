@@ -15,6 +15,7 @@ namespace fuelQ.Services
         }
         public User Create(User user)
         {
+           Console.WriteLine(user);
             _user.InsertOne(user);
             return user;
         }

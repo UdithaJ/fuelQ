@@ -1,5 +1,7 @@
 package com.example.client;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,32 +15,19 @@ public interface Api {
     String BASE_URL = "http://10.0.2.2:8080/";
 
 
-    @Headers({
-            "Accept: application/json",
-            "Connection: keep-alive"
-    })
-    @POST("User/AddDriver")
+    @POST("User/registerDriver")
     Call<Driver> registerDriver(@Body Driver driver);
 
-    @Headers({
-            "Accept: application/json",
-            "Connection: keep-alive"
-    })
+
     @POST("User/AddFuelStation")
     Call<FuelStation> registerFuelStation(@Body FuelStation fuelStation);
 
-    @Headers({
-            "Accept: application/json",
-            "Connection: keep-alive"
-    })
+
     @GET("GetFuelTypes")
     Call<List<FuelType>> getFuelTypes();
 
-    @Headers({
-            "Accept: application/json",
-            "Connection: keep-alive"
-    })
-    @POST("login")
-    Call<User> login(@Body User user);
+
+    @POST("User/userLogin")
+    Call<JsonObject> login(@Body User user);
 }
 

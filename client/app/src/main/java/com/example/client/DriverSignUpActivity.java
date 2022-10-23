@@ -31,15 +31,17 @@ import retrofit2.Response;
 
 public class DriverSignUpActivity extends Fragment  {
 
+    private Config config;
+
 private DriverSignUpPageBinding binding;
 
 String[] fuelTypes = {"Petrol", "Diesel"};
-String[] vehicleTypes = {"Bike", "Car/Van", "ThreeWheels", "Bus"};
+String[] vehicleTypes = {"Bike", "Car", "ThreeWheels", "Bus"};
 AutoCompleteTextView fuelType;
 AutoCompleteTextView vehicleType;
 ArrayAdapter<String> fuelTypeAdapterItems;
 ArrayAdapter<String> vehicleTypeAdapterItems;
-TextInputLayout nic, password, vehicleNumber;
+TextInputLayout nic, username, password, vehicleNumber;
 Button signUp;
 
     @Override
@@ -55,6 +57,7 @@ Button signUp;
         fuelType = view.findViewById(R.id.fuel_type);
         vehicleType = view.findViewById(R.id.vehicle_type);
         nic = view.findViewById(R.id.nic_field);
+        username = view.findViewById(R.id.name_field);
         vehicleNumber = view.findViewById(R.id.vehicle_number_field);
         password = view.findViewById(R.id.password_field);
         signUp = view.findViewById(R.id.driver_sign_up_button);
@@ -78,13 +81,36 @@ Button signUp;
             public void onClick(View view) {
 
                 String nicNumber =  nic.getEditText().getText().toString();
+                String name =  username.getEditText().getText().toString();
                 String vNumber =  vehicleNumber.getEditText().getText().toString();
                 String fType =  fuelType.getText().toString();
                 String vType =  vehicleType.getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
+                String fuelId = "";
+                String vTypeId = "";
 
-                Integer responseCode   = registerDriver(nicNumber, vNumber, vType, fType, pass);
+                if (fType.equals("Petrol")){
+                    fuelId = Config.petrolId;
+                }
+                else if (fType.equals("Diesel")){
+                    fuelId = Config.dieselId;
+                }
+
+                if (vType.equals("Bike")){
+                    vTypeId = Config.bike;
+                }
+                else if (vType.equals("Car")){
+                    vTypeId = Config.car;
+                }
+                else if (vType.equals("ThreeWheels")){
+                    vTypeId = Config.threeWheel;
+                }
+                else if (vType.equals("Bus")){
+                    vTypeId = Config.bus;
+                }
+
+                Integer responseCode   = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
 
                 if (responseCode == 200){
                     NavHostFragment.findNavController(DriverSignUpActivity.this)
@@ -98,7 +124,7 @@ Button signUp;
                     SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                     String userId = reader.getString("userId", "undefined");
 
-                    Log.i("Reading from storage", userId);
+
                 }
 
             }
@@ -106,22 +132,24 @@ Button signUp;
         });
     }
 
-    private Integer registerDriver(String nic, String vNumber,String vType, String fType, String password){
+    private Integer registerDriver(String nic, String name, String vNumber,String vType, String fType, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        Driver driver = new Driver("", nic, password, vNumber, fType, vType);
+        Driver driver = new Driver("", nic, name, password, vNumber, fType, vType);
         HttpsTrustManager.allowAllSSL();
 
-        JSONObject newDriver = new JSONObject();  //if needed
-        try {
-            newDriver.put("nic", nic);
-            newDriver.put("vehicleNumber", vNumber);
-            newDriver.put("fuelType", fType);
-            newDriver.put("vehicleType", vType);
-            newDriver.put("password", password);
+        Log.i("Reading from storage", driver.getFuelType());
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        JSONObject newDriver = new JSONObject();  //if needed
+//        try {
+//            newDriver.put("nic", nic);
+//            newDriver.put("vehicleNumber", vNumber);
+//            newDriver.put("fuelType", fType);
+//            newDriver.put("vehicleType", vType);
+//            newDriver.put("password", password);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         Call<Driver> call = retrofitClient.getMyApi().registerDriver(driver);
         Log.i("payload", driver.getNic());
