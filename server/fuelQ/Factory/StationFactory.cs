@@ -1,5 +1,6 @@
 ﻿using fuelQ.Models;
 using fuelQ.Services;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace fuelQ.Factory
@@ -8,12 +9,20 @@ namespace fuelQ.Factory
     {
         private readonly IUserService userService;
         private readonly IFuelStatioService fuelStatioService;
+        private readonly IFuelInventoryService fuelInventoryService;
 
-        public StationFactory(IUserService userService, IFuelStatioService fuelStatioService)
+        public StationFactory(IUserService userService, IFuelStatioService fuelStatioService, IFuelInventoryService fuelInventoryService)
         {
             this.userService = userService;
             this.fuelStatioService = fuelStatioService;
+            this.fuelInventoryService = fuelInventoryService;
         }
+
+        internal ActionResult<string> GetStationFuelInventories(string stationId)
+        {
+            return JsonConvert.SerializeObject(fuelInventoryService.GetFuelInventoriesOfStation(stationId));
+        }
+
         internal string RegisterStation(StationOwner stationOwner)
         {
             User user = new User();
