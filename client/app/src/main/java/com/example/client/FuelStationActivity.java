@@ -8,6 +8,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ public class FuelStationActivity extends Fragment {
     private @NonNull
     FuelStationPageBinding binding;
     String stationId = null;
+    Integer defaultAmount = 100;
     TextInputLayout address, fsName, permitNo, petrolAmount, dieselAmount;
     View petrolBar, dieselBar;
 
@@ -67,6 +70,28 @@ public class FuelStationActivity extends Fragment {
         dieselAmount = view.findViewById(R.id.diesel_field);
         petrolBar = view.findViewById(R.id.petrol_bar);
         dieselBar = view.findViewById(R.id.diesel_bar);
+
+        petrolAmount.getEditText().addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+                String editPetrolAmount =  petrolAmount.getEditText().getText().toString();
+                ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
+                lp.width = 150;
+                lp.height = defaultAmount/100;
+                if(editPetrolAmount.equals("")){
+                    petrolAmount.getEditText().setText(defaultAmount.toString());
+                }
+                else{
+                    lp.height = Integer.valueOf(editPetrolAmount) /10;
+                }
+                petrolBar.requestLayout();
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
         return view;
     }
 
