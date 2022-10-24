@@ -67,5 +67,22 @@ namespace fuelQ.Controllers
             vehicleTypeService.Remove(id);
             return Ok($"Vehicle Type with id {id} is deleted.");
         }
+
+        // Put: FuelInventoryController/UpdateFuelAmount/5
+        [HttpPut("UpdateAllowedFuelAmount/{vehicleTypeId}/{ammount}")]
+        public ActionResult UpdateAllowedFuelAmount(string vehicleTypeId, int ammount)
+        {
+            VehicleType vehicleType = vehicleTypeService.Get(vehicleTypeId);
+            if (vehicleType == null)
+            {
+                return NotFound($"Vehicle type with vehicleTypeId {vehicleTypeId} and ammount {ammount} not found.");
+            }
+            else
+            {
+                vehicleType.MaxAmmount = ammount;
+                vehicleTypeService.Update(vehicleType.Id, vehicleType);
+                return Ok();
+            }
+        }
     }
 }
