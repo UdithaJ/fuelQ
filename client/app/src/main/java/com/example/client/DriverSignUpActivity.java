@@ -139,18 +139,6 @@ Button signUp;
 
         Log.i("Reading from storage", driver.getFuelType());
 
-//        JSONObject newDriver = new JSONObject();  //if needed
-//        try {
-//            newDriver.put("nic", nic);
-//            newDriver.put("vehicleNumber", vNumber);
-//            newDriver.put("fuelType", fType);
-//            newDriver.put("vehicleType", vType);
-//            newDriver.put("password", password);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
         Call<Driver> call = retrofitClient.getMyApi().registerDriver(driver);
         Log.i("payload", driver.getNic());
 

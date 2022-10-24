@@ -98,20 +98,8 @@ public class FSOSignUpActivity extends Fragment {
 
     private Integer registerFuelStation(String nic, String username, String permitNumber,String name, String address, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        FuelStation fuelStation = new FuelStation("", nic, username, name, permitNumber, address, password);
+        FuelStation fuelStation = new FuelStation("", username, nic, name, permitNumber, address, password);
         HttpsTrustManager.allowAllSSL();
-
-        JSONObject newFuelStation = new JSONObject();  //if needed
-        try {
-            newFuelStation.put("nic", nic);
-            newFuelStation.put("permitNo", permitNumber);
-            newFuelStation.put("name", name);
-            newFuelStation.put("address", address);
-            newFuelStation.put("password", password);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         Call<FuelStation> call = retrofitClient.getMyApi().registerFuelStation(fuelStation);
         Log.i("payload", fuelStation.getNic());

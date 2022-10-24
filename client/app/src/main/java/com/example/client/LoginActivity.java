@@ -100,18 +100,18 @@ private LoginPageBinding binding;
                 String userId = String.valueOf(userObj.get("Id"));
                 String userType = userObj.get("UserType").getAsString();
 
-                if ("Admin".equals(userType)){
-                    NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_admin);
-                }
-                else if ("Driver".equals(userType)){
-                    NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_admin);
-                }
-                else if ("Station Owner".equals(userType)){
+//                if ("Admin".equals(userType)){
+//                    NavHostFragment.findNavController(LoginActivity.this)
+//                            .navigate(R.id.login_to_admin);
+//                }
+//                else if ("Driver".equals(userType)){
+//                    NavHostFragment.findNavController(LoginActivity.this)
+//                            .navigate(R.id.login_to_admin);
+//                }
+//                else if ("Station Owner".equals(userType)){
                     NavHostFragment.findNavController(LoginActivity.this)
                             .navigate(R.id.login_to_fs_page);
-                }
+                //}
 
                 SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();

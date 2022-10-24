@@ -36,6 +36,7 @@
                 android:background="#090a09" />
 
             <View
+                android:id="@+id/petrol_bar"
                 android:layout_width="50dp"
                 android:layout_height="100dp"
                 android:layout_gravity="bottom"
@@ -43,6 +44,7 @@
                 android:background="#e3ae10" />
 
             <View
+                android:id="@+id/diesel_bar"
                 android:layout_width="50dp"
                 android:layout_height="200dp"
                 android:layout_gravity="bottom"
@@ -97,40 +99,65 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/petrol_field"
-                    android:layout_width="match_parent"
+                <FrameLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Petrol Amount"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                    android:layout_marginTop="9dp"
+                    android:padding="5dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/petrol_field"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Petrol"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/petrol_amount_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Update"
+                        android:layout_gravity="right|center_vertical"
                         />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </FrameLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/diesel_field"
-                    android:layout_width="match_parent"
+                <FrameLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Diesel Amount"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
+                    android:layout_marginTop="9dp"
+                    android:padding="5dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/diesel_field"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:hint="Diesel"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/diesel_amount_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Update"
+                        android:layout_gravity="right|center_vertical"
                         />
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/update_fuel_amount_btn"
-                    android:text="Update"
-                    android:textSize="22sp"/>
+                </FrameLayout>
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
@@ -165,10 +192,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fs_password_field"
+                    android:id="@+id/permit_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="Permit Number"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
