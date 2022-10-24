@@ -3,6 +3,7 @@ using fuelQ.Models;
 using fuelQ.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static System.Collections.Specialized.BitVector32;
 
 namespace fuelQ.Controllers
 {
@@ -12,13 +13,15 @@ namespace fuelQ.Controllers
     {
         private readonly IFuelStatioService fuelStationService;
         private readonly IUserService userService;
+        private readonly IFuelInventoryService fuelInventoryService;
         private readonly StationFactory stationFactory;
 
-        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService)
+        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService, IFuelInventoryService fuelInventoryService)
         {
             this.fuelStationService = fuelStationService;
             this.userService = userService;
-            this.stationFactory = new StationFactory(userService, fuelStationService);
+            this.fuelInventoryService = fuelInventoryService;
+            this.stationFactory = new StationFactory(userService, fuelStationService, fuelInventoryService);
         }
         // GET: FuelStationController
         [HttpGet("GetFuelStations")]
@@ -79,5 +82,13 @@ namespace fuelQ.Controllers
         {
             return stationFactory.RegisterStation(stationOwner);
         }
+
+        // GET: FuelStationController/GetStationFuelAmount/5
+        [HttpGet("GetStationFuelAmount/{stationId}")]
+        public ActionResult<String> GetStationFuelAmount(string stationId)
+        {
+            return stationFactory.GetStationFuelInventories(stationId);
+        }
+
     }
 }
