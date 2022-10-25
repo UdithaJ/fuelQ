@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.client" >
+    package="com.example.client">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,12 +13,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Client"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ListView"
+            android:exported="false"
+            android:label="@string/title_activity_list_view"
+            android:theme="@style/Theme.Client.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".StationList"
+            android:exported="false"
+            android:label="@string/title_activity_station_list"
+            android:theme="@style/Theme.Client.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DriverQueue"
+            android:exported="false"
+            android:label="@string/title_activity_driver_queue"
+            android:theme="@style/Theme.Client.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Client.NoActionBar" >
+            android:theme="@style/Theme.Client.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
