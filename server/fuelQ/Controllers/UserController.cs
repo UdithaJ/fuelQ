@@ -72,8 +72,11 @@ namespace fuelQ.Controllers
             {
                 return NotFound($"User with id {id} not found.");
             }
-            userService.Remove(id);
-            return Ok($"User with id {id} is deleted.");
+            else
+            {
+                userService.Remove(id);
+                return Ok($"User with id {id} is deleted."); 
+            }
         }
 
         // Post: UserController/RegisterDriver

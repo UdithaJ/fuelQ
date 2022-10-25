@@ -10,12 +10,14 @@ namespace fuelQ.Factory
         private readonly IUserService userService;
         private readonly IFuelStatioService fuelStatioService;
         private readonly IFuelInventoryService fuelInventoryService;
+        private readonly IFuelTypeService fuelTypeService;
 
-        public StationFactory(IUserService userService, IFuelStatioService fuelStatioService, IFuelInventoryService fuelInventoryService)
+        public StationFactory(IUserService userService, IFuelStatioService fuelStatioService, IFuelInventoryService fuelInventoryService, IFuelTypeService fuelTypeService)
         {
             this.userService = userService;
             this.fuelStatioService = fuelStatioService;
             this.fuelInventoryService = fuelInventoryService;
+            this.fuelTypeService = fuelTypeService;
         }
 
         internal ActionResult<string> GetStationFuelInventories(string stationId)
@@ -38,7 +40,15 @@ namespace fuelQ.Factory
             station.Name = stationOwner.StationName;
             station.permitNumber = stationOwner.permitNumber;
             fuelStatioService.Create(station);
-            return JsonConvert.SerializeObject(new { user = user , station = station});
+            List<FuelInventory> fuelInventories = new List<FuelInventory>();
+            List<FuelType> fuelTypes = fuelTypeService.Get();
+            foreach (FuelType fuelType in fuelTypes)
+            {
+                FuelInventory inventory = new FuelInventory() { StationId = station.Id , FuelTypeId= fuelType.Id, CurrentCapacirt = 0,FuelAvailability = false};
+                FuelInventory newInventory = fuelInventoryService.Create(inventory);
+                fuelInventories.Add(newInventory);
+            }
+            return JsonConvert.SerializeObject(new { user = user , station = station , fuelInventory = fuelInventories});
         }
     }
 }

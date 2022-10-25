@@ -94,7 +94,7 @@ namespace fuelQ.Controllers
             {
                 fuelInventory.CurrentCapacirt = ammount;
                 fuelInventoryService.Update(fuelInventory.Id, fuelInventory);
-                return Ok();
+                return StatusCode(200, Json(new { status = "Success" }));
             }
         }
     }
