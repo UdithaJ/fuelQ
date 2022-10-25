@@ -48,18 +48,19 @@
 
     </LinearLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.test.listviewwithimage.MainActivity">
+<!--    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context="com.example.test.listviewwithimage.MainActivity">-->
 
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
-        </ListView>
-    </RelativeLayout>
+<!--&lt;!&ndash;        <ListView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/list"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_marginBottom="50dp">&ndash;&gt;-->
+<!--&lt;!&ndash;        </ListView>&ndash;&gt;-->
+<!--        -->
+<!--    </RelativeLayout>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
