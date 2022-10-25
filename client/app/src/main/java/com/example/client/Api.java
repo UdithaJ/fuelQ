@@ -1,5 +1,6 @@
 package com.example.client;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -29,14 +30,23 @@ public interface Api {
     @GET("GetFuelTypes")
     Call<List<FuelType>> getFuelTypes();
 
+    @GET("VehicleType/GetVehicleTypes")
+    Call<JsonArray> getVehicleTypes();
+
     @GET("FuelStation/{id}")
     Call<JsonObject> getFuelStation(@Path("id") String id);
 
+    @GET("FuelInventory/{id}")
+    Call<JsonArray> getFuelInventory(@Path("id") String id);
+
     @PUT("FuelStation/{id}")
-    Call<JsonObject> updateFuelStation(@Path("id") String id, FuelStation fuelStation);
+    Call<JsonObject> updateFuelStation(@Path("id") String id, @Body FuelStation fuelStation);
 
     @PUT("FuelInventory/{id}")
-    Call<JsonObject> updateFuelInventory(@Path("id") String id, FuelInventory fuelInventory);
+    Call<JsonObject> updateFuelInventory(@Path("id") String id, @Body FuelInventory fuelInventory);
+
+    @PUT("VehicleType/UpdateAllowedFuelAmount/{vid}/{amount}")
+    Call<Void> updateVehicleMaxFuelAmount(@Path("vid") String id, @Path("amount") Integer amount);
 
 
 }

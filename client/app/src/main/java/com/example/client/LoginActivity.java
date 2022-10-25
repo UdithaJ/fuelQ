@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.client.databinding.LoginPageBinding;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonObject;
 
@@ -59,6 +60,9 @@ private LoginPageBinding binding;
 
                 login(nicNumber, pass);
 
+                Snackbar snackbar = Snackbar.make(view, "Logged In", Snackbar.LENGTH_LONG);
+                snackbar.show();
+
                 SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                 String userType = reader.getString("userType", "undefined");
 
@@ -94,27 +98,30 @@ private LoginPageBinding binding;
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+
                 JsonObject object = response.body();
                 JsonObject userObj = (JsonObject) object.get("user");
 
                 String userId = String.valueOf(userObj.get("Id"));
                 String userType = userObj.get("UserType").getAsString();
 
-//                if ("Admin".equals(userType)){
-//                    NavHostFragment.findNavController(LoginActivity.this)
-//                            .navigate(R.id.login_to_admin);
-//                }
-//                else if ("Driver".equals(userType)){
-//                    NavHostFragment.findNavController(LoginActivity.this)
-//                            .navigate(R.id.login_to_admin);
-//                }
-//                else if ("Station Owner".equals(userType)){
+                if ("Admin".equals(userType)){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_admin);
+                }
+                else if ("Driver".equals(userType)){
+                    NavHostFragment.findNavController(LoginActivity.this)
+                            .navigate(R.id.login_to_admin);
+                }
+                else if ("Station Owner".equals(userType)){
+                    JsonObject stationObj = (JsonObject) object.get("fuelStation");
+                    editor.putString("stationId",  String.valueOf(stationObj.get("Id")));
                     NavHostFragment.findNavController(LoginActivity.this)
                             .navigate(R.id.login_to_fs_page);
-                //}
+                }
 
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("userId", userId);
                 editor.putString("userType", userType);
                 editor.apply();

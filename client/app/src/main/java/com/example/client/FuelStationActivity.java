@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.client.databinding.FuelStationPageBinding;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 
@@ -32,8 +33,9 @@ public class FuelStationActivity extends Fragment {
 
     private @NonNull
     FuelStationPageBinding binding;
-    String stationId = null;
-    Integer defaultAmount = 100;
+    String stationId = "6357daa5e81436d3cc4ae563";
+    Integer minAmount = 100;
+    Integer maxAmount = 6000;
     TextInputLayout address, fsName, permitNo, petrolAmount, dieselAmount;
     View petrolBar, dieselBar;
 
@@ -71,33 +73,71 @@ public class FuelStationActivity extends Fragment {
         petrolBar = view.findViewById(R.id.petrol_bar);
         dieselBar = view.findViewById(R.id.diesel_bar);
 
+        SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+        stationId = reader.getString("stationId", "undefined");
+
         petrolAmount.getEditText().addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
-
                 String editPetrolAmount =  petrolAmount.getEditText().getText().toString();
                 ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
                 lp.width = 150;
-                lp.height = defaultAmount/100;
-                if(editPetrolAmount.equals("")){
-                    petrolAmount.getEditText().setText(defaultAmount.toString());
+                lp.height = minAmount/100;
+                if(editPetrolAmount.equals("") || Integer.valueOf(editPetrolAmount) < minAmount){
+                    //petrolAmount.getEditText().setText(minAmount.toString());
                 }
                 else{
-                    lp.height = Integer.valueOf(editPetrolAmount) /10;
+                    Integer amount = Integer.valueOf(editPetrolAmount);
+
+                    if (amount > maxAmount ){
+                        lp.height = maxAmount/10;
+                        petrolAmount.getEditText().setText(maxAmount.toString());
+                    }
+                    else{
+                        lp.height = amount/10;
+                    }
+
                 }
                 petrolBar.requestLayout();
             }
-
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
+
+        dieselAmount.getEditText().addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                String editDieselAmount =  dieselAmount.getEditText().getText().toString();
+                ViewGroup.LayoutParams lp = dieselBar.getLayoutParams();
+                lp.width = 150;
+                lp.height = minAmount/100;
+                if(editDieselAmount.equals("") || Integer.valueOf(editDieselAmount) < minAmount){
+                    //dieselAmount.getEditText().setText(minAmount.toString());
+                }
+                else{
+                    Integer amount = Integer.valueOf(editDieselAmount);
+
+                    if (amount > maxAmount ){
+                        lp.height = maxAmount/10;
+                        dieselAmount.getEditText().setText(maxAmount.toString());
+                    }
+                    else{
+                        lp.height = amount/10;
+                    }
+
+                }
+                dieselBar.requestLayout();
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
         return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getFuelStation("634bb8f3d23a3fd969a5a788");
+
+        getFuelStation(stationId.replaceAll("^\"|\"$", ""));
+        getFuelInventory(stationId.replaceAll("^\"|\"$", ""));
 
         ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
         lp.width = 150;
@@ -109,9 +149,6 @@ public class FuelStationActivity extends Fragment {
         lp2.height = 300;
         petrolBar.requestLayout();
 
-        SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
-        stationId = reader.getString("stationId", "undefined");
-
         binding.updateFsDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +158,7 @@ public class FuelStationActivity extends Fragment {
                 String editPermitNo =  permitNo.getEditText().getText().toString();
 
                 FuelStation fuelStation = new FuelStation(stationId, "", "", editName, editPermitNo, editAddress,"");
-                updateFuelStation(stationId, fuelStation);
+                updateFuelStation(stationId.replaceAll("^\"|\"$", ""), fuelStation);
             }
         });
 
@@ -132,7 +169,7 @@ public class FuelStationActivity extends Fragment {
                 String editPetrolAmount =  petrolAmount.getEditText().getText().toString();
 
                 FuelInventory fuelInventory = new FuelInventory("", stationId, Config.petrolId, Integer.valueOf(editPetrolAmount));
-                updateFuelInventory(stationId, fuelInventory);
+                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), fuelInventory);
             }
         });
 
@@ -143,7 +180,7 @@ public class FuelStationActivity extends Fragment {
                 String editDieselAmount =  dieselAmount.getEditText().getText().toString();
 
                 FuelInventory fuelInventory = new FuelInventory("", stationId, Config.petrolId, Integer.valueOf(editDieselAmount));
-                updateFuelInventory(stationId, fuelInventory);
+                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), fuelInventory);
             }
         });
 
@@ -170,15 +207,49 @@ public class FuelStationActivity extends Fragment {
                 fsName.getEditText().setText(stationName);
                 permitNo.getEditText().setText(permitNumber);
 
-                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("stationId", stationId );
-                editor.apply();
+//                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPref.edit();
+//                editor.putString("stationId", stationId );
+//                editor.apply();
 
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                Log.i("response", String.valueOf(t));
+
+            }
+        });
+
+        return 200;
+    }
+
+    private Integer getFuelInventory(String id){
+        RetrofitClient retrofitClient = RetrofitClient.getInstance();
+        HttpsTrustManager.allowAllSSL();
+
+        Call<JsonArray> call = retrofitClient.getMyApi().getFuelInventory(id);
+
+        call.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+
+                JsonArray fuelInventory = response.body();
+
+                JsonObject petrol = (JsonObject) fuelInventory.get(0);
+                JsonObject diesel = (JsonObject) fuelInventory.get(1);
+
+                String pAmount = petrol.get("CurrentCapacirt").getAsString();
+                String dAmount =  petrol.get("CurrentCapacirt").getAsString();
+
+                petrolAmount.getEditText().setText(pAmount);
+                dieselAmount.getEditText().setText(dAmount);
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
 
                 Log.i("response", String.valueOf(t));
 
@@ -231,15 +302,8 @@ public class FuelStationActivity extends Fragment {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
+
                 JsonObject fuelStation = response.body();
-
-                String stationName = String.valueOf(fuelStation.get("Id"));
-                String stationAddress = fuelStation.get("address").getAsString();
-                String permitNumber = fuelStation.get("permitNumber").getAsString();
-
-                address.getEditText().setText(stationAddress);
-                fsName.getEditText().setText(stationName);
-                permitNo.getEditText().setText(permitNumber);
             }
 
             @Override
