@@ -7,22 +7,75 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.client.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first" >
+        android:name="com.example.client.LoginActivity"
+        android:label="Fuel Master"
+        tools:layout="@layout/login_page" >
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/login_to_fso_sign_up"
+            app:destination="@id/FSO_Sign_Up_Fragment" />
+
+        <action
+            android:id="@+id/login_to_fs_page"
+            app:destination="@id/FS_Activity_Page" />
+
+        <action
+            android:id="@+id/login_to_admin"
+            app:destination="@id/Admin_Fragment" />
+
+        <action
+            android:id="@+id/login_to_station"
+            app:destination="@id/Find_station" />
+
+
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.client.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second" >
+        android:name="com.example.client.DriverSignUpActivity"
+        android:label="Driver Sign Up"
+        tools:layout="@layout/driver_sign_up_page" >
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/driver_sign_up_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/FSO_Sign_Up_Fragment"
+        android:name="com.example.client.FSOSignUpActivity"
+        android:label="Sign Up As Fuel Station Owner"
+        tools:layout="@layout/fso_sign_up_page" >
+
+        <action
+            android:id="@+id/fso_sign_up_to_login"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FS_Activity_Page"
+        android:name="com.example.client.FuelStationActivity"
+        android:label="Update Data"
+        tools:layout="@layout/fuel_station_page" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/Admin_Fragment"
+        android:name="com.example.client.AdminActivity"
+        android:label="Admin View"
+        tools:layout="@layout/admin_page" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/Find_station"
+        android:name="com.example.client.DriverQueue"
+        android:label="Find Fuel Station"
+        tools:layout="@layout/activity_driver_queue" >
+
+    </fragment>
+
 </navigation>

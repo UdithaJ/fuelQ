@@ -16,14 +16,17 @@ namespace fuelQ.Models
         [BsonElement("nic")]
         public string NIC { get; set; } = String.Empty;
 
-        [BsonElement("email")]
-        public string Email { get; set; } = String.Empty;
+        /*[BsonElement("email")]
+        public string Email { get; set; } = String.Empty;*/
 
         [BsonElement("password")]
         public string Password { get; set; } = String.Empty;
 
-        [BsonElement("vehicleType")]
+        [BsonElement("userType")]
+        public string UserType { get; set; } = String.Empty;
+
+        /*[BsonElement("vehicleType")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string VehicleType { get; set; } = String.Empty;
+        public string VehicleType { get; set; } = String.Empty;*/
     }
 }

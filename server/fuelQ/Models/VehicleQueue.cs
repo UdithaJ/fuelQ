@@ -6,6 +6,10 @@ namespace fuelQ.Models
     [BsonIgnoreExtraElements]
     public class VehicleQueue
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; } = String.Empty;
+
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("stationId")]
         public string StationId { get; set; } = String.Empty;
@@ -28,5 +32,8 @@ namespace fuelQ.Models
 
         [BsonElement("isIn")]
         public bool IsIn { get; set; }
+
+        [BsonElement("expectedAmmount")]
+        public int ExpectedAmmount { get; set; }
     }
 }

@@ -5,7 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".LoginActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,14 +18,50 @@
         android:layout_height="match_parent"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         tools:context=".MainActivity"
+        android:gravity="center_vertical"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/progressstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:text="FUEL"
+                android:textColor="#FF8601"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="MASTER"
+                android:textStyle="bold"
+                android:textColor="#030302"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp" />
+        </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,9 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login"
-                android:textSize="36sp"
-                android:textAlignment="center"
-                android:layout_gravity="center_horizontal" />
+                android:textSize="30sp"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="textStart" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nic_field"
@@ -67,7 +108,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/activity_main_loginButton"
+                android:id="@+id/login_button"
                 android:text="Login"
                 android:textSize="22sp"/>
 
@@ -76,10 +117,19 @@
                 android:layout_height="wrap_content"/>
 
             <Button
-                android:id="@+id/register_link"
+                android:id="@+id/driver_register_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="Sign Up As Driver"
+                android:layout_gravity="center"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                />
+
+            <Button
+                android:id="@+id/fso_register_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up As FS Owner"
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 />
@@ -89,6 +139,5 @@
 
     </LinearLayout>
 
-
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
