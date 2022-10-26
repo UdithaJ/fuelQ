@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Client"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".StationPage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ListView"
             android:exported="false"
             android:label="@string/title_activity_list_view"
