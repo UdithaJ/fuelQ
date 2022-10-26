@@ -123,15 +123,12 @@ Button signUp;
 
                     SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                     String userId = reader.getString("userId", "undefined");
-
-
                 }
-
             }
-
         });
     }
 
+    //Method to register driver
     private Integer registerDriver(String nic, String name, String vNumber,String vType, String fType, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         Driver driver = new Driver("", nic, name, password, vNumber, fType, vType);

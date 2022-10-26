@@ -40,6 +40,7 @@ private LoginPageBinding binding;
         userId = reader.getString("userId", "undefined");
         userType = reader.getString("userType", "undefined");
 
+        //Redirect if already logged in
         if(userId != null && userType != null){
             if ("Admin".equals(userType)){
                 NavHostFragment.findNavController(LoginActivity.this)
@@ -61,9 +62,6 @@ private LoginPageBinding binding;
         nic = view.findViewById(R.id.nic_field);
         password = view.findViewById(R.id.password_field);
         login = view.findViewById(R.id.login_button);
-
-        //nic.getEditText().setText("9878676786V");
-
 
         return view;
 
@@ -109,6 +107,7 @@ private LoginPageBinding binding;
         });
     }
 
+    //User login method
     private void login(String nic, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         User user = new User("", nic, password, "", "");
@@ -128,6 +127,7 @@ private LoginPageBinding binding;
                 String userId = String.valueOf(userObj.get("Id"));
                 String userType = userObj.get("UserType").getAsString();
 
+                //redirect by user type
                 if ("Admin".equals(userType)){
                     NavHostFragment.findNavController(LoginActivity.this)
                             .navigate(R.id.login_to_admin);
