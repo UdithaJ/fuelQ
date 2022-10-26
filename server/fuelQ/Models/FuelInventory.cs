@@ -19,7 +19,7 @@ namespace fuelQ.Models
         public string FuelTypeId { get; set; } = String.Empty;
 
         [BsonElement("currentCapacirt")]
-        public float CurrentCapacirt { get; set; }
+        public int CurrentCapacirt { get; set; }
 
         [BsonElement("fuelAvailability")]
         public bool FuelAvailability { get; set; }

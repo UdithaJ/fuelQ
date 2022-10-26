@@ -51,8 +51,11 @@ namespace fuelQ.Controllers
             {
                 return NotFound($"Vehicle with id {id} not found.");
             }
-            vehicleService.Update(id, vehicle);
-            return NoContent();
+            else
+            {
+                vehicleService.Update(id, vehicle);
+                return StatusCode(200, Json(new { status = "Success" }));
+            }
         }
 
         // Delete: VehicleController/Delete/5

@@ -51,8 +51,11 @@ namespace fuelQ.Controllers
             {
                 return NotFound($"Fuel Type with id {id} not found.");
             }
-            fuelTypeService.Update(id, fuelType);
-            return NoContent();
+            else
+            {
+                fuelTypeService.Update(id, fuelType);
+                return StatusCode(200, Json(new { status = "Success" }));
+            }
         }
 
         // Delete: FuelTypeController/Delete/5
