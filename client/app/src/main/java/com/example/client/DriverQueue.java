@@ -29,9 +29,9 @@ public class DriverQueue extends AppCompatActivity {
 
 //        setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_driver_queue);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_driver_queue);
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
 //        binding.fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -42,10 +42,10 @@ public class DriverQueue extends AppCompatActivity {
 //        });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_driver_queue);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_driver_queue);
+//        return NavigationUI.navigateUp(navController, appBarConfiguration)
+//                || super.onSupportNavigateUp();
+//    }
 }
