@@ -1,6 +1,8 @@
-﻿using fuelQ.Models;
+﻿using fuelQ.Factory;
+using fuelQ.Models;
 using fuelQ.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fuelQ.Controllers
@@ -10,10 +12,16 @@ namespace fuelQ.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService;
-
-        public UserController(IUserService userService)
+        private readonly IVehicleService vehicleService;
+        private readonly IFuelStatioService fuelStatioService;
+        private readonly UserFactory userFactory;
+        //UserFactory userFactory = new UserFactory();
+        public UserController(IUserService userService , IVehicleService vehicleService , IFuelStatioService fuelStatioService)
         {
             this.userService = userService;
+            this.vehicleService = vehicleService;
+            this.fuelStatioService = fuelStatioService;
+            this.userFactory = new UserFactory(userService  , vehicleService , fuelStatioService);
         }
         // GET: UserController
         [HttpGet("GetUsers")]
@@ -64,8 +72,25 @@ namespace fuelQ.Controllers
             {
                 return NotFound($"User with id {id} not found.");
             }
-            userService.Remove(id);
-            return Ok($"User with id {id} is deleted.");
+            else
+            {
+                userService.Remove(id);
+                return Ok($"User with id {id} is deleted."); 
+            }
+        }
+
+        // Post: UserController/RegisterDriver
+        [HttpPost("registerDriver")]
+        public ActionResult<String> RegisterDriver([FromBody] Driver driver)
+        {
+            return userFactory.RegisterDriver(driver);
+        }
+        
+        // Post: UserController/RegisterDriver
+        [HttpPost("userLogin")]
+        public ActionResult<String> UserLogin([FromBody] User user)
+        {
+            return userFactory.ValidateUser(user);
         }
     }
 }

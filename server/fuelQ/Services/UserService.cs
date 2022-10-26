@@ -15,6 +15,7 @@ namespace fuelQ.Services
         }
         public User Create(User user)
         {
+           Console.WriteLine(user);
             _user.InsertOne(user);
             return user;
         }
@@ -27,6 +28,14 @@ namespace fuelQ.Services
         public User Get(string id)
         {
             return _user.Find(user => user.Id == id).FirstOrDefault();
+        }
+        public User GetByNic(string nic)
+        {
+            return _user.Find(user => user.NIC == nic).FirstOrDefault();
+        }
+        public User GetValidUserByNic(string nic , string password)
+        {
+            return _user.Find(user => user.NIC == nic && user.Password == password).FirstOrDefault();
         }
 
         public void Remove(string id)

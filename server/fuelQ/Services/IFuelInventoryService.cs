@@ -9,5 +9,7 @@ namespace fuelQ.Services
         FuelInventory Create(FuelInventory fuelInventory);
         void Update(string id, FuelInventory fuelInventory);
         void Remove(string id);
+        List<FuelInventory> GetFuelInventoriesOfStation(string stationId);
+        FuelInventory GetFuelInventoryByStationIdAndFuelTypeId(string stationId, string fuelTypeId);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using fuelQ.Helpers;
 using fuelQ.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace fuelQ.Services
@@ -37,6 +38,16 @@ namespace fuelQ.Services
         public void Update(string id, FuelInventory fuelInventory)
         {
             _fuelInventory.ReplaceOne(type => type.Id == id, fuelInventory);
+        }
+
+        public List<FuelInventory> GetFuelInventoriesOfStation(string stationId)
+        {
+            return _fuelInventory.Find(fuelInventory => fuelInventory.StationId == stationId).ToList();
+        }
+
+        public FuelInventory GetFuelInventoryByStationIdAndFuelTypeId(string stationId , string fuelTypeId)
+        {
+            return _fuelInventory.Find(fuelInventory => fuelInventory.StationId == stationId && fuelInventory.FuelTypeId == fuelTypeId).FirstOrDefault();
         }
     }
 }

@@ -2,6 +2,7 @@
 using fuelQ.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace fuelQ.Controllers
 {
@@ -30,6 +31,18 @@ namespace fuelQ.Controllers
             if (fuelInventory == null)
             {
                 return NotFound($"Fuel Inventory with id {id} not found.");
+            }
+            return fuelInventory;
+        }
+
+        // GET: FuelInventoryController/GetFuelInventoryByStationIdAndFuelTypeId/5
+        [HttpGet("GetFuelInventoryByStationAndFuelType/{stationId}/{fuelTypeId}")]
+        public ActionResult<FuelInventory> GetFuelInventoryByStationIdAndFuelTypeId(string stationId, string fuelTypeId)
+        {
+            var fuelInventory = fuelInventoryService.GetFuelInventoryByStationIdAndFuelTypeId(stationId, fuelTypeId);
+            if (fuelInventory == null)
+            {
+                return NotFound($"Fuel Inventory with stationId {stationId} and fuelTypeId {fuelTypeId} not found.");
             }
             return fuelInventory;
         }
@@ -66,6 +79,23 @@ namespace fuelQ.Controllers
             }
             fuelInventoryService.Remove(id);
             return Ok($"Fuel Inventory with id {id} is deleted.");
+        }
+
+        // Put: FuelInventoryController/UpdateFuelAmount/5
+        [HttpPut("UpdateFuelAmount/{stationId}/{fuelTypeId}/{ammount}")]
+        public ActionResult UpdateFuelAmount(string stationId, string fuelTypeId, int ammount)
+        {
+            FuelInventory fuelInventory = fuelInventoryService.GetFuelInventoryByStationIdAndFuelTypeId(stationId, fuelTypeId);
+            if (fuelInventory == null)
+            {
+                return NotFound($"Fuel Inventory with stationId {stationId} and fuelTypeId {fuelTypeId} not found.");
+            }
+            else
+            {
+                fuelInventory.CurrentCapacirt = ammount;
+                fuelInventoryService.Update(fuelInventory.Id, fuelInventory);
+                return StatusCode(200, Json(new { status = "Success" }));
+            }
         }
     }
 }

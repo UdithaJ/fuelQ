@@ -28,7 +28,7 @@ public class FSOSignUpActivity extends Fragment {
 
 
     private @NonNull FsoSignUpPageBinding binding;
-    TextInputLayout nic, permitNo, password, fsName, fsAddress;
+    TextInputLayout nic, username, permitNo, password, fsName, fsAddress;
     Button signUp;
 
 
@@ -57,6 +57,7 @@ public class FSOSignUpActivity extends Fragment {
         View view = binding.getRoot();
 
         nic = view.findViewById(R.id.nic_field);
+        username =  view.findViewById(R.id.username_field);
         permitNo = view.findViewById(R.id.permit_field);
         fsName = view.findViewById(R.id.fs_name_field);
         fsAddress = view.findViewById(R.id.address_field);
@@ -75,13 +76,14 @@ public class FSOSignUpActivity extends Fragment {
             public void onClick(View view) {
 
                 String nicNumber =  nic.getEditText().getText().toString();
+                String uname = username.getEditText().getText().toString();
                 String permitNumber =  permitNo.getEditText().getText().toString();
                 String name =  fsName.getEditText().getText().toString();
                 String address = fsAddress.getEditText().getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
 
-                Integer responseCode  = registerFuelStation(nicNumber, permitNumber,name, address, pass);
+                Integer responseCode  = registerFuelStation(nicNumber, uname, permitNumber,name, address, pass);
 
                 if (responseCode == 200){
                     NavHostFragment.findNavController(FSOSignUpActivity.this)
@@ -94,22 +96,10 @@ public class FSOSignUpActivity extends Fragment {
         });
     }
 
-    private Integer registerFuelStation(String nic, String permitNumber,String name, String address, String password){
+    private Integer registerFuelStation(String nic, String username, String permitNumber,String name, String address, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        FuelStation fuelStation = new FuelStation("", nic, name, permitNumber, address, password);
+        FuelStation fuelStation = new FuelStation("", username, nic, name, permitNumber, address, password);
         HttpsTrustManager.allowAllSSL();
-
-        JSONObject newFuelStation = new JSONObject();  //if needed
-        try {
-            newFuelStation.put("nic", nic);
-            newFuelStation.put("permitNo", permitNumber);
-            newFuelStation.put("name", name);
-            newFuelStation.put("address", address);
-            newFuelStation.put("password", password);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         Call<FuelStation> call = retrofitClient.getMyApi().registerFuelStation(fuelStation);
         Log.i("payload", fuelStation.getNic());
