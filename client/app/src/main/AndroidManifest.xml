@@ -22,24 +22,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ListView"
-            android:exported="false"
-            android:label="@string/title_activity_list_view"
-            android:theme="@style/Theme.Client.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".StationList"
-            android:exported="false"
-            android:label="@string/title_activity_station_list"
-            android:theme="@style/Theme.Client.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".DriverQueue"
             android:exported="false"
             android:label="@string/title_activity_driver_queue"
