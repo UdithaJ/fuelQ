@@ -17,15 +17,17 @@ namespace fuelQ.Controllers
         private readonly IUserService userService;
         private readonly IFuelInventoryService fuelInventoryService;
         private readonly IFuelTypeService fuelTypeService;
+        private readonly ISecurityService securityService;
         private readonly StationFactory stationFactory;
 
-        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService, IFuelInventoryService fuelInventoryService, IFuelTypeService fuelTypeService)
+        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService, IFuelInventoryService fuelInventoryService, IFuelTypeService fuelTypeService , ISecurityService securityService)
         {
             this.fuelStationService = fuelStationService;
             this.userService = userService;
             this.fuelInventoryService = fuelInventoryService;
             this.fuelTypeService = fuelTypeService;
-            this.stationFactory = new StationFactory(userService, fuelStationService, fuelInventoryService, fuelTypeService);
+            this.securityService = securityService;
+            this.stationFactory = new StationFactory(userService, fuelStationService, fuelInventoryService, fuelTypeService, securityService);
             this.fuelTypeService = fuelTypeService;
         }
         // GET: FuelStationController
@@ -46,8 +48,20 @@ namespace fuelQ.Controllers
             }
             return fuelStation;
         }
+        
+        // GET: FuelStationController/GetFuelStationByName/name
+        [HttpGet("{name}")]
+        public ActionResult<FuelStation> GetFuelStationByName(string name)
+        {
+            var fuelStation = fuelStationService.GetByName(name);
+            if (fuelStation == null)
+            {
+                return NotFound($"Fuel Station with name {name} not found.");
+            }
+            return fuelStation;
+        }
 
-        // Post: FuelStationController/Create
+        // Post: FuelStationController/AddFuelStation
         [HttpPost("AddFuelStation")]
         public ActionResult Create([FromBody] FuelStation fuelStation)
         {
@@ -86,7 +100,7 @@ namespace fuelQ.Controllers
             return Ok($"Fuel Station with id {id} is deleted.");
         }
 
-        // Post: UserController/RegisterDriver
+        // Post: FuelStationController/registerFuelStation
         [HttpPost("registerFuelStation")]
         public ActionResult<String> RegisterDriver([FromBody] StationOwner stationOwner)
         {
@@ -95,7 +109,7 @@ namespace fuelQ.Controllers
 
         // GET: FuelStationController/GetStationFuelAmount/5
         [HttpGet("GetStationFuelAmount/{stationId}")]
-        public ActionResult<String> GetStationFuelAmount(string stationId)
+        public ActionResult GetStationFuelAmount(string stationId)
         {
             return stationFactory.GetStationFuelInventories(stationId);
         }

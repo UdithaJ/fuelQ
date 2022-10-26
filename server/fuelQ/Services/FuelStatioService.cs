@@ -29,6 +29,11 @@ namespace fuelQ.Services
             return _fuelStations.Find(fuelStation => fuelStation.Id == id).FirstOrDefault();
         }
 
+        public FuelStation GetByName(string name)
+        {
+            return _fuelStations.Find(fuelStation => fuelStation.Name == name).FirstOrDefault();
+        }
+
         public FuelStation GetStationByOwner(string ownerId)
         {
             return _fuelStations.Find(fuelStation => fuelStation.StationOwnerId == ownerId).FirstOrDefault();

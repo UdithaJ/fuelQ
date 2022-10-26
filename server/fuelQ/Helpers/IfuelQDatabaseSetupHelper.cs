@@ -1,5 +1,8 @@
 ﻿namespace fuelQ.Helpers
 {
+    /// <summary>
+    /// Helper for retrieve environment variables
+    /// </summary>
     public interface IfuelQDatabaseSetupHelper
     {
         string DatabaseName { get; set; }
@@ -11,5 +14,6 @@
         string VehicleQueueCollectionName { get; set; }
         string VehicleTypeCollectionName { get; set; }
         string VehicleCollectionName { get; set; }
+        string Salt { get; set; }
     }
 }
