@@ -13,13 +13,28 @@ namespace fuelQ.Factory
         private readonly IUserService userService;
         private readonly IVehicleService vehicleService;
         private readonly IFuelStatioService fuelStatioService;
+        private readonly ISecurityService securityService;
 
-        public UserFactory(IUserService userService , IVehicleService vehicleService, IFuelStatioService fuelStatioService)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="userService"></param>
+        /// <param name="vehicleService"></param>
+        /// <param name="fuelStatioService"></param>
+        /// <param name="securityService"></param>
+        public UserFactory(IUserService userService , IVehicleService vehicleService, IFuelStatioService fuelStatioService, ISecurityService securityService)
         {
             this.userService = userService;
             this.vehicleService = vehicleService;
             this.fuelStatioService = fuelStatioService;
+            this.securityService = securityService;
         }
+
+        /// <summary>
+        /// Used For Driver registration
+        /// </summary>
+        /// <param name="driver">Driver Type Object</param>
+        /// <returns></returns>
         internal string RegisterDriver(Driver driver)
         {
             User user = new User();
@@ -42,9 +57,15 @@ namespace fuelQ.Factory
             return JsonConvert.SerializeObject(new { user = user, vehicle = vehicle });
         }
 
+        /// <summary>
+        /// User Authorization
+        /// Authorizes Both Driver and Station owner types of users
+        /// </summary>
+        /// <param name="user"> User Type object</param>
+        /// <returns></returns>
         internal ActionResult<string> ValidateUser(User user)
         {
-            User candidateUser = userService.GetValidUserByNic(user.NIC , user.Password);
+            User candidateUser = userService.GetValidUserByNic(user.NIC , securityService.GenerateHashPassword(user.Password));
             if (candidateUser != null)
             {
                 if (candidateUser.UserType == "Driver")

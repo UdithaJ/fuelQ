@@ -16,6 +16,7 @@ namespace fuelQ.Controllers
         {
             this.fuelInventoryService = fuelInventoryService;
         }
+        //Gets All Fuel Inventories
         // GET: FuelInventoryController
         [HttpGet("GetFuelInventories")]
         public ActionResult<List<FuelInventory>> Index()
@@ -23,6 +24,7 @@ namespace fuelQ.Controllers
             return fuelInventoryService.Get();
         }
 
+        //Gets Fuel inventories By Fuel Inventory Id
         // GET: FuelInventoryController/GetFuelInventoryById/5
         [HttpGet("{id}")]
         public ActionResult<FuelInventory> GetFuelInventoryById(string id)

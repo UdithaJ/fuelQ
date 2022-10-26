@@ -6,6 +6,7 @@ namespace fuelQ.Services
     {
         List<FuelStation> Get();
         FuelStation Get(string id);
+        FuelStation GetByName(string name);
         FuelStation GetStationByOwner(string ownerId);
         FuelStation Create(FuelStation fuelStation);
         void Update(string id, FuelStation fuelStation);

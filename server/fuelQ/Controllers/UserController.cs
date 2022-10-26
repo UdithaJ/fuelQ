@@ -14,14 +14,16 @@ namespace fuelQ.Controllers
         private readonly IUserService userService;
         private readonly IVehicleService vehicleService;
         private readonly IFuelStatioService fuelStatioService;
+        private readonly ISecurityService securityService;
         private readonly UserFactory userFactory;
         //UserFactory userFactory = new UserFactory();
-        public UserController(IUserService userService , IVehicleService vehicleService , IFuelStatioService fuelStatioService)
+        public UserController(IUserService userService , IVehicleService vehicleService , IFuelStatioService fuelStatioService , ISecurityService securityService)
         {
             this.userService = userService;
             this.vehicleService = vehicleService;
             this.fuelStatioService = fuelStatioService;
-            this.userFactory = new UserFactory(userService  , vehicleService , fuelStatioService);
+            this.securityService = securityService;
+            this.userFactory = new UserFactory(userService  , vehicleService , fuelStatioService , securityService);
         }
         // GET: UserController
         [HttpGet("GetUsers")]
