@@ -291,28 +291,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/join_queue"
-                        android:text="Joined to the queue"
+                        android:text="Join queue"
                         android:textSize="15sp"
                         android:layout_marginTop="20dp"
                         />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/exit_before"
-                        android:text="Exit before pump fuel"
-                        android:textSize="15sp"
-                        android:layout_marginTop="20dp"
-                        />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/exit_after"
-                        android:text="Exit after pump fuel"
-                        android:textSize="15sp"
-                        android:layout_marginTop="20dp"
-                        />
-
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

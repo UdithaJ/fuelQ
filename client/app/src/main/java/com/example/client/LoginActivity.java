@@ -134,7 +134,7 @@ private LoginPageBinding binding;
                 }
                 else if ("Driver".equals(userType)){
                     NavHostFragment.findNavController(LoginActivity.this)
-                            .navigate(R.id.login_to_admin);
+                            .navigate(R.id.login_to_station);
                 }
                 else if ("Station Owner".equals(userType)){
                     JsonObject stationObj = (JsonObject) object.get("fuelStation");
