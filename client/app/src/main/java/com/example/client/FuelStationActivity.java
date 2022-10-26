@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.client.databinding.FuelStationPageBinding;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -33,7 +34,7 @@ public class FuelStationActivity extends Fragment {
 
     private @NonNull
     FuelStationPageBinding binding;
-    String stationId = "6357daa5e81436d3cc4ae563";
+    String stationId = null;
     Integer minAmount = 100;
     Integer maxAmount = 6000;
     TextInputLayout address, fsName, permitNo, petrolAmount, dieselAmount;
@@ -137,7 +138,7 @@ public class FuelStationActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getFuelStation(stationId.replaceAll("^\"|\"$", ""));
-        getFuelInventory(stationId.replaceAll("^\"|\"$", ""));
+        //getFuelInventory(stationId.replaceAll("^\"|\"$", ""));
 
         ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
         lp.width = 150;
@@ -167,9 +168,7 @@ public class FuelStationActivity extends Fragment {
             public void onClick(View view) {
 
                 String editPetrolAmount =  petrolAmount.getEditText().getText().toString();
-
-                FuelInventory fuelInventory = new FuelInventory("", stationId, Config.petrolId, Integer.valueOf(editPetrolAmount));
-                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), fuelInventory);
+                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), Config.petrolId, Integer.valueOf(editPetrolAmount) );
             }
         });
 
@@ -178,9 +177,7 @@ public class FuelStationActivity extends Fragment {
             public void onClick(View view) {
 
                 String editDieselAmount =  dieselAmount.getEditText().getText().toString();
-
-                FuelInventory fuelInventory = new FuelInventory("", stationId, Config.petrolId, Integer.valueOf(editDieselAmount));
-                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), fuelInventory);
+                updateFuelInventory(stationId.replaceAll("^\"|\"$", ""), Config.dieselId, Integer.valueOf(editDieselAmount) );
             }
         });
 
@@ -229,6 +226,7 @@ public class FuelStationActivity extends Fragment {
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
 
+        Log.i("Get Fuel Ivnentory", id);
         Call<JsonArray> call = retrofitClient.getMyApi().getFuelInventory(id);
 
         call.enqueue(new Callback<JsonArray>() {
@@ -241,7 +239,7 @@ public class FuelStationActivity extends Fragment {
                 JsonObject diesel = (JsonObject) fuelInventory.get(1);
 
                 String pAmount = petrol.get("CurrentCapacirt").getAsString();
-                String dAmount =  petrol.get("CurrentCapacirt").getAsString();
+                String dAmount =  diesel.get("CurrentCapacirt").getAsString();
 
                 petrolAmount.getEditText().setText(pAmount);
                 dieselAmount.getEditText().setText(dAmount);
@@ -269,15 +267,18 @@ public class FuelStationActivity extends Fragment {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                JsonObject fuelStation = response.body();
+//                JsonObject fuelStation = response.body();
+//
+//                String stationName = String.valueOf(fuelStation.get("Id"));
+//                String stationAddress = fuelStation.get("address").getAsString();
+//                String permitNumber = fuelStation.get("permitNumber").getAsString();
+//
+//                address.getEditText().setText(stationAddress);
+//                fsName.getEditText().setText(stationName);
+//                permitNo.getEditText().setText(permitNumber);
 
-                String stationName = String.valueOf(fuelStation.get("Id"));
-                String stationAddress = fuelStation.get("address").getAsString();
-                String permitNumber = fuelStation.get("permitNumber").getAsString();
-
-                address.getEditText().setText(stationAddress);
-                fsName.getEditText().setText(stationName);
-                permitNo.getEditText().setText(permitNumber);
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        "Station Details Updated", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
@@ -292,18 +293,32 @@ public class FuelStationActivity extends Fragment {
     }
 
 
-    private Integer updateFuelInventory(String id, FuelInventory fuelInventory){
+    private Integer updateFuelInventory(String id, String fuelTypeId, Integer amount){
+        Log.i("fuel type id", fuelTypeId );
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
 
-        Call<JsonObject> call = retrofitClient.getMyApi().updateFuelInventory(id, fuelInventory);
+        Call<JsonObject> call = retrofitClient.getMyApi().updateFuelInventory(id, fuelTypeId, amount);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
 
-                JsonObject fuelStation = response.body();
+                JsonObject inventory = response.body();
+                JsonObject Status = (JsonObject) inventory.get("value");
+                String statusVal = Status.get("status").getAsString();
+
+
+                if(statusVal.equals("Success")) {
+                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+                            "Fuel Amount  Updated", Snackbar.LENGTH_LONG).show();
+                }
+                else{
+                    Snackbar.make(getActivity().findViewById(android.R.id.content),
+                            "Something went wrong", Snackbar.LENGTH_LONG).show();
+                }
+
             }
 
             @Override

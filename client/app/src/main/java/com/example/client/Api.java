@@ -42,8 +42,8 @@ public interface Api {
     @PUT("FuelStation/{id}")
     Call<JsonObject> updateFuelStation(@Path("id") String id, @Body FuelStation fuelStation);
 
-    @PUT("FuelInventory/{id}")
-    Call<JsonObject> updateFuelInventory(@Path("id") String id, @Body FuelInventory fuelInventory);
+    @PUT("FuelInventory/UpdateFuelAmount/{stationId}/{fuelTypeId}/{ammount}")
+    Call<JsonObject> updateFuelInventory(@Path("stationId") String stationId, @Path("fuelTypeId") String fuelTypeId, @Path("ammount") Integer ammount);
 
     @PUT("VehicleType/UpdateAllowedFuelAmount/{vid}/{amount}")
     Call<Void> updateVehicleMaxFuelAmount(@Path("vid") String id, @Path("amount") Integer amount);

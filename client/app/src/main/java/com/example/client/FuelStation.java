@@ -5,18 +5,18 @@ public class FuelStation {
     private String id;
     private String nic;
     private String userName;
-    private String stationName;
+    private String name;
     private String permitNumber;
-    private String stationAddress;
+    private String address;
     private String password;
 
     public FuelStation(String id, String username, String nic, String name, String permit_no, String address, String password) {
         this.id = id;
         this.nic = nic;
         this.userName = username;
-        this.stationName = name;
+        this.name = name;
         this.permitNumber = permit_no;
-        this.stationAddress = address;
+        this.address = address;
         this.password = password;
     }
 
@@ -45,11 +45,11 @@ public class FuelStation {
     }
 
     public String getStationName() {
-        return stationName;
+        return name;
     }
 
     public void setStationName(String stationName) {
-        this.stationName = stationName;
+        this.name = stationName;
     }
 
     public String getPermitNumber() {
@@ -61,11 +61,11 @@ public class FuelStation {
     }
 
     public String getStationAddress() {
-        return stationAddress;
+        return address;
     }
 
     public void setStationAddress(String stationAddress) {
-        this.stationAddress = stationAddress;
+        this.address = stationAddress;
     }
 
     public String getPassword() {

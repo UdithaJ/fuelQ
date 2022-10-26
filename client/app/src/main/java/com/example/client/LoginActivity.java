@@ -25,6 +25,8 @@ import retrofit2.Response;
 public class LoginActivity extends Fragment {
 
 private LoginPageBinding binding;
+    String userId = null;
+    String userType = null;
     TextInputLayout nic, password;
     Button login;
 
@@ -33,6 +35,25 @@ private LoginPageBinding binding;
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+        SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+        userId = reader.getString("userId", "undefined");
+        userType = reader.getString("userType", "undefined");
+
+        if(userId != null && userType != null){
+            if ("Admin".equals(userType)){
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.login_to_admin);
+            }
+            else if ("Driver".equals(userType)){
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.login_to_admin);
+            }
+            else if ("Station Owner".equals(userType)){
+                NavHostFragment.findNavController(LoginActivity.this)
+                        .navigate(R.id.login_to_fs_page);
+            }
+        }
 
         binding = LoginPageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
