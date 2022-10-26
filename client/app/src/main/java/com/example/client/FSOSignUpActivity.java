@@ -83,20 +83,15 @@ public class FSOSignUpActivity extends Fragment {
                 String pass =  password.getEditText().getText().toString();
 
 
-                Integer responseCode  = registerFuelStation(nicNumber, uname, permitNumber,name, address, pass);
-
-                if (responseCode == 200){
-                    NavHostFragment.findNavController(FSOSignUpActivity.this)
-                            .navigate(R.id.fso_sign_up_to_login);
-
-                }
+               registerFuelStation(nicNumber, uname, permitNumber,name, address, pass);
 
             }
 
         });
     }
 
-    private Integer registerFuelStation(String nic, String username, String permitNumber,String name, String address, String password){
+    //Method to register fuel station
+    private void registerFuelStation(String nic, String username, String permitNumber,String name, String address, String password){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         FuelStation fuelStation = new FuelStation("", username, nic, name, permitNumber, address, password);
         HttpsTrustManager.allowAllSSL();
@@ -109,8 +104,9 @@ public class FSOSignUpActivity extends Fragment {
             public void onResponse(Call<FuelStation> call, Response<FuelStation> response) {
 
                 FuelStation responseFromAPI = response.body();
-                String responseString = "Response Code : " + response.code();
-                Log.i("response", responseString);
+
+                    NavHostFragment.findNavController(FSOSignUpActivity.this)
+                            .navigate(R.id.fso_sign_up_to_login);
 
             }
 
@@ -121,8 +117,6 @@ public class FSOSignUpActivity extends Fragment {
 
             }
         });
-
-        return 200;
     }
 
 }

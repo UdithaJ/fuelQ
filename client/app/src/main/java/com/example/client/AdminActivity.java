@@ -134,6 +134,7 @@ public class AdminActivity extends Fragment {
 
     }
 
+    //Method to update allowed maximum fuel amount by vehicle type
     private void updateVehicleMaxFuelAmount(String id, Integer amount){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();

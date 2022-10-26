@@ -183,6 +183,7 @@ public class FuelStationActivity extends Fragment {
 
     }
 
+    //Method to get fuel station details
     private Integer getFuelStation(String id){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
@@ -222,11 +223,11 @@ public class FuelStationActivity extends Fragment {
         return 200;
     }
 
+    //Method to get fuel station fuel inventory details
     private Integer getFuelInventory(String id){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
 
-        Log.i("Get Fuel Ivnentory", id);
         Call<JsonArray> call = retrofitClient.getMyApi().getFuelInventory(id);
 
         call.enqueue(new Callback<JsonArray>() {
@@ -257,6 +258,7 @@ public class FuelStationActivity extends Fragment {
         return 200;
     }
 
+    //Method to update fuel station details
     private Integer updateFuelStation(String id, FuelStation fuelStation){
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
@@ -292,7 +294,7 @@ public class FuelStationActivity extends Fragment {
         return 200;
     }
 
-
+    //Method to update fuel inventory details
     private Integer updateFuelInventory(String id, String fuelTypeId, Integer amount){
         Log.i("fuel type id", fuelTypeId );
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
