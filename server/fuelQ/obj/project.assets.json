@@ -103,6 +103,25 @@
           }
         }
       },
+      "MongoDB.Driver/2.18.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
+          "MongoDB.Bson": "2.18.0",
+          "MongoDB.Driver.Core": "2.18.0",
+          "MongoDB.Libmongocrypt": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/MongoDB.Driver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MongoDB.Driver.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MongoDB.Driver.Core/2.18.0": {
         "type": "package",
         "dependencies": {
@@ -486,6 +505,25 @@
         "packageIcon.png"
       ]
     },
+    "MongoDB.Driver/2.18.0": {
+      "sha512": "nq7wRMeNoqUe+bndHFMDGX8IY3iSmzLoyLzzf8DRos137O+5R4NCsd9qtw/n+DoGFas0gzzyD546Cpz+5AkmLg==",
+      "type": "package",
+      "path": "mongodb.driver/2.18.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net472/MongoDB.Driver.dll",
+        "lib/net472/MongoDB.Driver.xml",
+        "lib/netstandard2.0/MongoDB.Driver.dll",
+        "lib/netstandard2.0/MongoDB.Driver.xml",
+        "lib/netstandard2.1/MongoDB.Driver.dll",
+        "lib/netstandard2.1/MongoDB.Driver.xml",
+        "mongodb.driver.2.18.0.nupkg.sha512",
+        "mongodb.driver.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "MongoDB.Driver.Core/2.18.0": {
       "sha512": "/X5Ty32gyDyzs/fWFwKGS0QUhfQT3V9Sc/F8yhILBu8bjCjBscOFKQsKieAha8xxBnYS7dZvTvhvEJWT7HgJ1g==",
       "type": "package",
@@ -839,31 +877,30 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "MongoDB.Driver >= 2.18.0",
       "MongoDB.Driver.Core >= 2.18.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Win\\.nuget\\packages\\": {}
+    "C:\\Users\\UdithaJ\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\fuelQ\\fuelQ\\server\\fuelQ\\fuelQ.csproj",
+      "projectUniqueName": "E:\\Academic Data\\Year 04\\Semester 02\\EAD\\Assignment\\fuelQ\\server\\fuelQ\\fuelQ.csproj",
       "projectName": "fuelQ",
-      "projectPath": "D:\\fuelQ\\fuelQ\\server\\fuelQ\\fuelQ.csproj",
-      "packagesPath": "C:\\Users\\Win\\.nuget\\packages\\",
-      "outputPath": "D:\\fuelQ\\fuelQ\\server\\fuelQ\\obj\\",
+      "projectPath": "E:\\Academic Data\\Year 04\\Semester 02\\EAD\\Assignment\\fuelQ\\server\\fuelQ\\fuelQ.csproj",
+      "packagesPath": "C:\\Users\\UdithaJ\\.nuget\\packages\\",
+      "outputPath": "E:\\Academic Data\\Year 04\\Semester 02\\EAD\\Assignment\\fuelQ\\server\\fuelQ\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Win\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\UdithaJ\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -882,6 +919,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.18.0, )"
+          },
           "MongoDB.Driver.Core": {
             "target": "Package",
             "version": "[2.18.0, )"
