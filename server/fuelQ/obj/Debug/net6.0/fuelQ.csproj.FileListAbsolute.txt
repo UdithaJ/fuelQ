@@ -63,3 +63,4 @@ E:\Academic Data\Year 04\Semester 02\EAD\Assignment\fuelQ\server\fuelQ\obj\Debug
 E:\Academic Data\Year 04\Semester 02\EAD\Assignment\fuelQ\server\fuelQ\obj\Debug\net6.0\fuelQ.pdb
 E:\Academic Data\Year 04\Semester 02\EAD\Assignment\fuelQ\server\fuelQ\obj\Debug\net6.0\fuelQ.genruntimeconfig.cache
 E:\Academic Data\Year 04\Semester 02\EAD\Assignment\fuelQ\server\fuelQ\obj\Debug\net6.0\ref\fuelQ.dll
+E:\Academic Data\Year 04\Semester 02\EAD\Assignment\fuelQ\server\fuelQ\bin\Debug\net6.0\Newtonsoft.Json.dll

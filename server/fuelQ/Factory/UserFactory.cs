@@ -29,12 +29,16 @@ namespace fuelQ.Factory
             user.Password = driver.Password;
             //user.Email = driver.Email;
             user.UserType = "Driver";
+            Console.WriteLine("before create user");
             userService.Create(user);
+            Console.WriteLine("After create user");
             vehicle.OwnerId = user.Id; 
             vehicle.VehicleNo = driver.VehicleNo;
             vehicle.VehicleType = driver.VehicleType;
             vehicle.FuelType = driver.FuelType;
+            Console.WriteLine("before create vehicle");
             vehicleService.Create(vehicle);
+              Console.WriteLine("after create user");
             return JsonConvert.SerializeObject(new { user = user, vehicle = vehicle });
         }
 
