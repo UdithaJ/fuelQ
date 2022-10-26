@@ -80,6 +80,7 @@ namespace fuelQ.Controllers
         [HttpPost("registerDriver")]
         public ActionResult<String> RegisterDriver([FromBody] Driver driver)
         {
+            Console.WriteLine("Inside register driver");
             return userFactory.RegisterDriver(driver);
         }
         
