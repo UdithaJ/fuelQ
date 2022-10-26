@@ -21,6 +21,9 @@ public interface Api {
     @POST("User/registerDriver")
     Call<Driver> registerDriver(@Body Driver driver);
 
+    @POST("User/joinQueue")
+    Call<QueueClass> joinQueue(@Body QueueClass queue);
+
     @POST("FuelStation/registerFuelStation")
     Call<FuelStation> registerFuelStation(@Body FuelStation fuelStation);
 
@@ -35,6 +38,9 @@ public interface Api {
 
     @GET("FuelStation/{id}")
     Call<JsonObject> getFuelStation(@Path("id") String id);
+
+    @GET("FuelStation/{name}")
+    Call<JsonObject> searchStationByName(@Path("name") String name);
 
     @GET("FuelInventory/{id}")
     Call<JsonArray> getFuelInventory(@Path("id") String id);

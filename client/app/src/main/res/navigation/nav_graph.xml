@@ -26,6 +26,12 @@
         <action
             android:id="@+id/login_to_admin"
             app:destination="@id/Admin_Fragment" />
+
+        <action
+            android:id="@+id/login_to_station"
+            app:destination="@id/Find_station" />
+
+
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -61,6 +67,14 @@
         android:name="com.example.client.AdminActivity"
         android:label="Admin View"
         tools:layout="@layout/admin_page" >
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/Find_station"
+        android:name="com.example.client.DriverQueue"
+        android:label="Find Fuel Station"
+        tools:layout="@layout/activity_driver_queue" >
 
     </fragment>
 
