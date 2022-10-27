@@ -50,7 +50,7 @@ namespace fuelQ.Controllers
         }
         
         // GET: FuelStationController/GetFuelStationByName/name
-        [HttpGet("{name}")]
+        [HttpGet("GetFuelStationByName{name}")]
         public ActionResult<FuelStation> GetFuelStationByName(string name)
         {
             var fuelStation = fuelStationService.GetByName(name);
@@ -71,18 +71,22 @@ namespace fuelQ.Controllers
 
         // Put: FuelStationController/Edit/5
         [HttpPut("{id}")]
-        public ActionResult Edit(string id, FuelStation fuelStation)
+        public ActionResult Edit(string id, [FromBody] StationOwner stationOwner)
         {
             FuelStation existingFuelStation = fuelStationService.Get(id);
+            FuelStation station = new FuelStation();
             if (existingFuelStation == null)
             {
                 return NotFound($"Fuel Station with id {id} not found.");
             }
             else
             {
-                fuelStation.Id =id;
-                fuelStation.StationOwnerId = existingFuelStation.StationOwnerId;
-                fuelStationService.Update(id, fuelStation);
+                station.Id =id;
+                station.StationOwnerId = existingFuelStation.StationOwnerId;
+                station.Name = stationOwner.StationName;
+                station.Address = stationOwner.StationAddress;
+                station.permitNumber = stationOwner.permitNumber;
+                fuelStationService.Update(id, station);
                 return StatusCode(200, Json(new { status = "Success" }));
             }
         }
