@@ -23,6 +23,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/splash_bacground"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="350dp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
@@ -41,7 +47,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="25dp"
-                android:background="#e3ae10" />
+                android:background="#fc7703" />
 
             <View
                 android:id="@+id/diesel_bar"
@@ -87,6 +93,9 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
@@ -108,7 +117,7 @@
                         android:id="@+id/petrol_field"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Petrol"
+                        android:hint="Petrol Amount (L)"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -139,7 +148,7 @@
                         android:id="@+id/diesel_field"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Diesel"
+                        android:hint="Diesel Amount (L)"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText

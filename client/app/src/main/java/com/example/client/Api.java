@@ -42,8 +42,9 @@ public interface Api {
     @GET("FuelStation/{name}")
     Call<JsonObject> searchStationByName(@Path("name") String name);
 
-    @GET("FuelInventory/{id}")
-    Call<JsonArray> getFuelInventory(@Path("id") String id);
+
+    @GET("FuelStation/GetStationFuelAmount/{stationId}")
+    Call<JsonArray> getFuelInventory(@Path("stationId") String stationId);
 
     @PUT("FuelStation/{id}")
     Call<JsonObject> updateFuelStation(@Path("id") String id, @Body FuelStation fuelStation);

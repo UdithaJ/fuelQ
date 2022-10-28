@@ -35,7 +35,7 @@ public class FuelStationActivity extends Fragment {
     private @NonNull
     FuelStationPageBinding binding;
     String stationId = null;
-    Integer minAmount = 100;
+    Integer minAmount = 0;
     Integer maxAmount = 6000;
     TextInputLayout address, fsName, permitNo, petrolAmount, dieselAmount;
     View petrolBar, dieselBar;
@@ -82,8 +82,8 @@ public class FuelStationActivity extends Fragment {
                 String editPetrolAmount =  petrolAmount.getEditText().getText().toString();
                 ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
                 lp.width = 150;
-                lp.height = minAmount/100;
-                if(editPetrolAmount.equals("") || Integer.valueOf(editPetrolAmount) < minAmount){
+                lp.height = 0;
+                if(editPetrolAmount.equals("")){
                     //petrolAmount.getEditText().setText(minAmount.toString());
                 }
                 else{
@@ -196,7 +196,7 @@ public class FuelStationActivity extends Fragment {
 
                 JsonObject fuelStation = response.body();
 
-                String stationId = String.valueOf(fuelStation.get("id"));
+               // String stationId = String.valueOf(fuelStation.get("id"));
                 String stationName = String.valueOf(fuelStation.get("name"));
                 String stationAddress = fuelStation.get("address").getAsString();
                 String permitNumber = fuelStation.get("permitNumber").getAsString();
@@ -225,6 +225,7 @@ public class FuelStationActivity extends Fragment {
 
     //Method to get fuel station fuel inventory details
     private Integer getFuelInventory(String id){
+        Log.i("Get fuel inventory", id);
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
         HttpsTrustManager.allowAllSSL();
 
@@ -236,11 +237,15 @@ public class FuelStationActivity extends Fragment {
 
                 JsonArray fuelInventory = response.body();
 
+                Log.i("res", String.valueOf(fuelInventory));
+
                 JsonObject petrol = (JsonObject) fuelInventory.get(0);
                 JsonObject diesel = (JsonObject) fuelInventory.get(1);
 
                 String pAmount = petrol.get("CurrentCapacirt").getAsString();
                 String dAmount =  diesel.get("CurrentCapacirt").getAsString();
+
+                Log.i("petrol", pAmount);
 
                 petrolAmount.getEditText().setText(pAmount);
                 dieselAmount.getEditText().setText(dAmount);
