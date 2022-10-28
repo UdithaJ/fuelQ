@@ -105,7 +105,7 @@ public class FSOSignUpActivity extends Fragment {
                 }
 
 
-                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && permitNumber.equals("") && uname.equals("") && address.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
+                if(!nicNumber.equals("") && !name.equals("") && !pass.equals("") && !permitNumber.equals("") && !uname.equals("") && !address.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
                     registerFuelStation(nicNumber, uname, permitNumber, name, address, pass);
                 }
 
