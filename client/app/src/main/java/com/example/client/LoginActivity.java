@@ -84,8 +84,12 @@ private LoginPageBinding binding;
                     password.setError("Please Insert your Password");
                 }
 
+                if(!nicNumber.matches("^[0-9]{9}[vVxX]$")){
+                    nic.setError("Invalid NIC Number!");
+                }
 
-                if( !nicNumber.equals("") && !pass.equals("")){
+
+                if( !nicNumber.equals("") && !pass.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$")){
                     login(nicNumber, pass);
                     SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                 }

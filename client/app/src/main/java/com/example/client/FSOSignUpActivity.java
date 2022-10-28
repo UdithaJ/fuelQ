@@ -100,9 +100,12 @@ public class FSOSignUpActivity extends Fragment {
                 if ( address.equals("")) {
                     fsAddress.setError("Please Insert station address");
                 }
+                if(!nicNumber.matches("^[0-9]{9}[vVxX]$")){
+                    nic.setError("Invalid NIC Number!");
+                }
 
 
-                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && permitNumber.equals("") && uname.equals("") && address.equals("") ) {
+                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && permitNumber.equals("") && uname.equals("") && address.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
                     registerFuelStation(nicNumber, uname, permitNumber, name, address, pass);
                 }
 

@@ -128,8 +128,11 @@ Button signUp;
                 if ( vType.equals("")) {
                     vehicleType.setError("Please Insert your vehicle type");
                 }
+                if(!nicNumber.matches("^[0-9]{9}[vVxX]$")){
+                    nic.setError("Invalid NIC Number!");
+                }
 
-                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && vNumber.equals("") && fType.equals("") && vType.equals("") ) {
+                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && vNumber.equals("") && fType.equals("") && vType.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
 
                     Integer responseCode = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
 
