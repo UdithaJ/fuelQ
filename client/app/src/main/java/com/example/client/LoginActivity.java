@@ -79,9 +79,6 @@ private LoginPageBinding binding;
 
                 login(nicNumber, pass);
 
-                Snackbar snackbar = Snackbar.make(view, "Logged In", Snackbar.LENGTH_LONG);
-                snackbar.show();
-
                 SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
                 String userType = reader.getString("userType", "undefined");
 
@@ -142,6 +139,9 @@ private LoginPageBinding binding;
                     NavHostFragment.findNavController(LoginActivity.this)
                             .navigate(R.id.login_to_fs_page);
                 }
+
+                Snackbar.make(getActivity().findViewById(android.R.id.content),
+                        "Station Details Updated", Snackbar.LENGTH_LONG).show();
 
                 editor.putString("userId", userId);
                 editor.putString("userType", userType);
