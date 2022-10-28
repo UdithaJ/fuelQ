@@ -138,7 +138,7 @@ public class FuelStationActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         getFuelStation(stationId.replaceAll("^\"|\"$", ""));
-        //getFuelInventory(stationId.replaceAll("^\"|\"$", ""));
+        getFuelInventory(stationId.replaceAll("^\"|\"$", ""));
 
         ViewGroup.LayoutParams lp = petrolBar.getLayoutParams();
         lp.width = 150;
@@ -197,7 +197,7 @@ public class FuelStationActivity extends Fragment {
                 JsonObject fuelStation = response.body();
 
                // String stationId = String.valueOf(fuelStation.get("id"));
-                String stationName = String.valueOf(fuelStation.get("name"));
+                String stationName = fuelStation.get("name").getAsString();
                 String stationAddress = fuelStation.get("address").getAsString();
                 String permitNumber = fuelStation.get("permitNumber").getAsString();
 

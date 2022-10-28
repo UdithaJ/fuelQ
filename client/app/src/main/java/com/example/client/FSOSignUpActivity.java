@@ -82,8 +82,29 @@ public class FSOSignUpActivity extends Fragment {
                 String address = fsAddress.getEditText().getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
+                if ( nicNumber.equals("")) {
+                    nic.setError("Please Insert your NIC Number");
+                }
+                if ( name.equals("")) {
+                    username.setError("Please Insert a Fuel Station name");
+                }
+                if ( pass.equals("")) {
+                    password.setError("Please Insert your Password");
+                }
+                if ( permitNumber.equals("")) {
+                    permitNo.setError("Please Insert your permit Number");
+                }
+                if ( uname.equals("")) {
+                    username.setError("Please Insert a username");
+                }
+                if ( address.equals("")) {
+                    fsAddress.setError("Please Insert station address");
+                }
 
-               registerFuelStation(nicNumber, uname, permitNumber,name, address, pass);
+
+                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && permitNumber.equals("") && uname.equals("") && address.equals("") ) {
+                    registerFuelStation(nicNumber, uname, permitNumber, name, address, pass);
+                }
 
             }
 

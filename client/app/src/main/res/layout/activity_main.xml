@@ -30,7 +30,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:backgroundTint="#fc7703"
+        app:backgroundTint="#f55a42"
         app:srcCompat="@drawable/logout" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -110,19 +110,34 @@ Button signUp;
                     vTypeId = Config.bus;
                 }
 
-                Integer responseCode   = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
+                if ( nicNumber.equals("")) {
+                    nic.setError("Please Insert your NIC Number");
+                }
+                if ( name.equals("")) {
+                    username.setError("Please Insert a username");
+                }
+                if ( pass.equals("")) {
+                    password.setError("Please Insert your Password");
+                }
+                if ( vNumber.equals("")) {
+                    vehicleNumber.setError("Please Insert your vehicle Number");
+                }
+                if ( fType.equals("")) {
+                    fuelType.setError("Please Insert the fuel type");
+                }
+                if ( vType.equals("")) {
+                    vehicleType.setError("Please Insert your vehicle type");
+                }
 
-                if (responseCode == 200){
-                    NavHostFragment.findNavController(DriverSignUpActivity.this)
-                            .navigate(R.id.driver_sign_up_to_FirstFragment);
+                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && vNumber.equals("") && fType.equals("") && vType.equals("") ) {
 
-                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("userId", "user123");
-                    editor.apply();
+                    Integer responseCode = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
 
-                    SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    String userId = reader.getString("userId", "undefined");
+                    if (responseCode == 200) {
+                        NavHostFragment.findNavController(DriverSignUpActivity.this)
+                                .navigate(R.id.driver_sign_up_to_FirstFragment);
+                    }
+
                 }
             }
         });

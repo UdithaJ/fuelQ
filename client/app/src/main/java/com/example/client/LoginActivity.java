@@ -77,11 +77,18 @@ private LoginPageBinding binding;
                 String nicNumber =  nic.getEditText().getText().toString();
                 String pass =  password.getEditText().getText().toString();
 
-                login(nicNumber, pass);
+                if ( nic.getEditText().getText().toString().equals("")) {
+                    nic.setError("Please Insert your NIC Number");
+                }
+                if ( password.getEditText().getText().toString().equals("")) {
+                    password.setError("Please Insert your Password");
+                }
 
-                SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
-                String userType = reader.getString("userType", "undefined");
 
+                if( !nicNumber.equals("") && !pass.equals("")){
+                    login(nicNumber, pass);
+                    SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+                }
             }
         });
 
@@ -105,9 +112,10 @@ private LoginPageBinding binding;
     }
 
     //User login method
-    private void login(String nic, String password){
+    private void login(String nicNumber, String password){
+
         RetrofitClient retrofitClient = RetrofitClient.getInstance();
-        User user = new User("", nic, password, "", "");
+        User user = new User("", nicNumber, password, "", "");
         HttpsTrustManager.allowAllSSL();
         Call<JsonObject> call = retrofitClient.getMyApi().login(user);
 
@@ -141,7 +149,7 @@ private LoginPageBinding binding;
                 }
 
                 Snackbar.make(getActivity().findViewById(android.R.id.content),
-                        "Station Details Updated", Snackbar.LENGTH_LONG).show();
+                        "Logged In", Snackbar.LENGTH_LONG).show();
 
                 editor.putString("userId", userId);
                 editor.putString("userType", userType);

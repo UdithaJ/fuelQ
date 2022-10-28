@@ -121,6 +121,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign Up As Driver"
+                app:icon="@drawable/driver"
+                app:iconSize="20dp"
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 />
@@ -129,6 +131,8 @@
                 android:id="@+id/fso_register_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:icon="@drawable/fs"
+                app:iconSize="20dp"
                 android:text="Sign Up As FS Owner"
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
