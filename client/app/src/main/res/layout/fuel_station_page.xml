@@ -44,7 +44,7 @@
             <View
                 android:id="@+id/petrol_bar"
                 android:layout_width="50dp"
-                android:layout_height="100dp"
+                android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="25dp"
                 android:background="#fc7703" />
@@ -52,7 +52,7 @@
             <View
                 android:id="@+id/diesel_bar"
                 android:layout_width="50dp"
-                android:layout_height="200dp"
+                android:layout_height="0dp"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:background="#101ae3" />

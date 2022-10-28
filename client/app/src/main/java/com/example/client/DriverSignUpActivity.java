@@ -132,7 +132,7 @@ Button signUp;
                     nic.setError("Invalid NIC Number!");
                 }
 
-                if(!nicNumber.equals("") && name.equals("") && pass.equals("") && vNumber.equals("") && fType.equals("") && vType.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
+                if(!nicNumber.equals("") && !name.equals("") && !pass.equals("") && !vNumber.equals("") && !fType.equals("") && !vType.equals("") && nicNumber.matches("^[0-9]{9}[vVxX]$") ) {
 
                     Integer responseCode = registerDriver(nicNumber, name, vNumber, vTypeId, fuelId, pass);
 
