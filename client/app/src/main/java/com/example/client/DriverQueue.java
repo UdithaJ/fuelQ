@@ -1,5 +1,6 @@
 package com.example.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.client.databinding.DriverSignUpPageBinding;
@@ -28,6 +29,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +42,8 @@ import com.example.client.databinding.ActivityDriverQueueBinding;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 
 public class DriverQueue extends Fragment {
 
@@ -109,24 +114,17 @@ public class DriverQueue extends Fragment {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
                 JsonObject station = response.body();
+                JsonObject stationObj = (JsonObject) station.get("user");
 
-//                JsonObject car = (JsonObject) vehicleTypes.get(0);
-//                JsonObject bus = (JsonObject) vehicleTypes.get(1);
-//                JsonObject bike = (JsonObject) vehicleTypes.get(2);
-//                JsonObject threeWheel = (JsonObject) vehicleTypes.get(3);
-//
-//                bikeAmount.getEditText().setText(bike.get("maxAmmount").getAsString());
-//                carAmount.getEditText().setText(car.get("maxAmmount").getAsString());
-//                busAmount.getEditText().setText(bus.get("maxAmmount").getAsString());
-//                threeWheelAmount.getEditText().setText(threeWheel.get("maxAmmount").getAsString());
+                String stationId = String.valueOf(stationObj.get("Id"));
 
+                Intent intent = new Intent(DriverQueue.this.getActivity(), StationPage.class);
+                startActivity(intent);
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
                 Log.i("response", String.valueOf(t));
-
             }
         });
 

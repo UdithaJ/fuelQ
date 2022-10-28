@@ -118,7 +118,60 @@ public class Queue extends Fragment {
 
                     SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("userId", "user123");
+                    editor.putString("stationId", "");
+                    editor.apply();
+
+                    SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    String userId = reader.getString("userId", "undefined");
+
+
+                }
+
+            }
+
+        });
+
+        binding.exitBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String fType =  fuelType.getText().toString();
+                String vType =  vehicleType.getText().toString();
+                String amt1 =  amount.getEditText().getText().toString();
+                int amt = Integer.parseInt(amt1);
+
+                String fuelId = "";
+                String vTypeId = "";
+
+                if (fType.equals("Petrol")){
+                    fuelId = Config.petrolId;
+                }
+                else if (fType.equals("Diesel")){
+                    fuelId = Config.dieselId;
+                }
+
+                if (vType.equals("Bike")){
+                    vTypeId = Config.bike;
+                }
+                else if (vType.equals("Car")){
+                    vTypeId = Config.car;
+                }
+                else if (vType.equals("ThreeWheels")){
+                    vTypeId = Config.threeWheel;
+                }
+                else if (vType.equals("Bus")){
+                    vTypeId = Config.bus;
+                }
+
+                Integer responseCode   = joinQueue(vTypeId, fuelId, amt);
+
+                if (responseCode == 200){
+                    NavHostFragment.findNavController(Queue.this)
+                            .navigate(R.id.driver_sign_up_to_FirstFragment);
+
+                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("stationId", "");
                     editor.apply();
 
                     SharedPreferences reader = getActivity().getPreferences(Context.MODE_PRIVATE);

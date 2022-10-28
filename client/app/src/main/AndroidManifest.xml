@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Client"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ListView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Queue"
             android:exported="false">
             <meta-data
