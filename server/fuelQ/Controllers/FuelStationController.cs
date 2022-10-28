@@ -20,7 +20,7 @@ namespace fuelQ.Controllers
         private readonly ISecurityService securityService;
         private readonly StationFactory stationFactory;
 
-        public FuelStationController(IFuelStatioService fuelStationService , IUserService userService, IFuelInventoryService fuelInventoryService, IFuelTypeService fuelTypeService , ISecurityService securityService)
+        public FuelStationController(IFuelStatioService fuelStationService, IUserService userService, IFuelInventoryService fuelInventoryService, IFuelTypeService fuelTypeService, ISecurityService securityService)
         {
             this.fuelStationService = fuelStationService;
             this.userService = userService;
@@ -48,9 +48,9 @@ namespace fuelQ.Controllers
             }
             return fuelStation;
         }
-        
+
         // GET: FuelStationController/GetFuelStationByName/name
-        [HttpGet("GetFuelStationByName{name}")]
+        [HttpGet("GetFuelStationByName/{name}")]
         public ActionResult<FuelStation> GetFuelStationByName(string name)
         {
             var fuelStation = fuelStationService.GetByName(name);
@@ -81,7 +81,7 @@ namespace fuelQ.Controllers
             }
             else
             {
-                station.Id =id;
+                station.Id = id;
                 station.StationOwnerId = existingFuelStation.StationOwnerId;
                 station.Name = stationOwner.StationName;
                 station.Address = stationOwner.StationAddress;
@@ -113,7 +113,7 @@ namespace fuelQ.Controllers
 
         // GET: FuelStationController/GetStationFuelAmount/5
         [HttpGet("GetStationFuelAmount/{stationId}")]
-        public ActionResult GetStationFuelAmount(string stationId)
+        public ActionResult<String> GetStationFuelAmount(string stationId)
         {
             return stationFactory.GetStationFuelInventories(stationId);
         }

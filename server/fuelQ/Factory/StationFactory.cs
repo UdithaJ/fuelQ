@@ -15,7 +15,7 @@ namespace fuelQ.Factory
         private readonly IFuelInventoryService fuelInventoryService;
         private readonly IFuelTypeService fuelTypeService;
         private readonly ISecurityService securityService;
-        
+
 
         /// <summary>
         /// 
@@ -38,11 +38,11 @@ namespace fuelQ.Factory
         /// </summary>
         /// <param name="stationId">Fuel Station Id</param>
         /// <returns></returns>
-        internal ActionResult GetStationFuelInventories(string stationId)
+        internal ActionResult<string> GetStationFuelInventories(string stationId)
         {
-            //return JsonConvert.SerializeObject(fuelInventoryService.GetFuelInventoriesOfStation(stationId));
+            return JsonConvert.SerializeObject(fuelInventoryService.GetFuelInventoriesOfStation(stationId));
             //return fuelInventoryService.GetFuelInventoriesOfStation(stationId).ToJson();
-            return new ContentResult { Content = fuelInventoryService.GetFuelInventoriesOfStation(stationId).ToJson(), ContentType = "application/json" };
+            //return new ContentResult { Content = fuelInventoryService.GetFuelInventoriesOfStation(stationId).ToJson(), ContentType = "application/json" };
         }
         /// <summary>
         /// 
@@ -68,11 +68,11 @@ namespace fuelQ.Factory
             List<FuelType> fuelTypes = fuelTypeService.Get();
             foreach (FuelType fuelType in fuelTypes)
             {
-                FuelInventory inventory = new FuelInventory() { StationId = station.Id , FuelTypeId= fuelType.Id, CurrentCapacirt = 0,FuelAvailability = false};
+                FuelInventory inventory = new FuelInventory() { StationId = station.Id, FuelTypeId = fuelType.Id, CurrentCapacirt = 0, FuelAvailability = false };
                 FuelInventory newInventory = fuelInventoryService.Create(inventory);
                 fuelInventories.Add(newInventory);
             }
-            return JsonConvert.SerializeObject(new { user = user , station = station , fuelInventory = fuelInventories});
+            return JsonConvert.SerializeObject(new { user = user, station = station, fuelInventory = fuelInventories });
         }
     }
 }
